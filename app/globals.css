@@ -9,7 +9,7 @@
 
   body {
     @apply bg-dark-50 text-gray-100 antialiased;
-    background: linear-gradient(135deg, #000000 0%, #14243e 50%, #1a2f4f 100%);
+    background: linear-gradient(135deg, black 0%, #0f1724 50%, black 100%);
     background-attachment: fixed;
   }
 
@@ -19,6 +19,10 @@
 }
 
 @layer components {
+  .badge-glass {
+    @apply items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 backdrop-blur-sm border border-primary-500/20 text-primary-400 text-sm font-medium;
+  }
+
   .section {
     @apply py-16 px-6 md:py-24 relative;
   }
@@ -28,11 +32,11 @@
   }
 
   .content {
-    @apply mx-auto max-w-content;
+    @apply mx-auto;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-dark-50;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-dark-50;
     background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -105,9 +109,35 @@
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #67e8f9 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, #67e8f9 0%, #06b6d4 25%, white 50%, #0e7490 75%, #155e75 100%);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: gradient-shift 3s ease infinite;
   }
+}
+
+/* Animated gradient shift */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+  0%, 49% { 
+    opacity: 1; 
+  }
+  50%, 100% { 
+    opacity: 0; 
+  }
+}
+
+.animate-blink {
+  animation: blink 0.8s infinite;
 }
