@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, ChevronDown, Sparkles } from 'lucide-react'
+import { ArrowRight, ChevronDown, Atom } from 'lucide-react'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import PolyhedraBackground from './PolyhedraBackground'
@@ -11,7 +11,7 @@ export default function Hero() {
   const [loopNum, setLoopNum] = useState(0)
   const [typingSpeed, setTypingSpeed] = useState(150)
 
-  const phrases = ['Lyana Aqilah', 'a Software Engineer', 'a Full-Stack Developer']
+  const phrases = ['Lyana Aqilah', 'a Software Engineer', 'Full-Stack Developer']
 
   useEffect(() => {
     const handleType = () => {
@@ -52,31 +52,31 @@ export default function Hero() {
       {/* 3D Polyhedra Animation Background */}
       <PolyhedraBackground />
 
-      <div className="container mx-auto px-6 text-left relative z-10">
+      <div className="container mx-auto px-6 text-left relative z-10 animate-on-load">
         <div className="max-w-4xl">
           {/* Badge */}
-          <div className="badge-glass inline-flex mb-8 animate-fade-in">
-            <Sparkles className="w-4 h-4" />
+          <div className="badge-glass inline-flex mb-8 animate-fade-in-down delay-200">
+            <Atom className="w-4 h-4" />
             Available for new projects
           </div>
 
           {/* Main Heading with Typing Effect */}
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-normal animate-fade-in-up delay-300">
             Hi, I'm{' '}
             <br className="hidden sm:block" />
-            <span className="gradient-text inline-block">{text}</span>
+            <span className="gradient-text">{text}</span>
             <span className="animate-blink text-primary">|</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl leading-relaxed animate-fade-in-up delay-400">
             Full-stack developer crafting exceptional digital experiences with
             <span className="text-primary font-semibold"> clean code</span> and
             <span className="text-primary font-semibold"> innovative solutions</span>.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-start gap-4">
+          <div className="flex flex-col sm:flex-row items-start gap-4 animate-fade-in-up delay-500">
             <Link
               href="#projects"
               className="btn-primary group"
@@ -94,7 +94,7 @@ export default function Hero() {
           </div>
 
           {/* Trust Badge */}
-          <div className="mt-16 flex items-center gap-3">
+          <div className="mt-16 flex items-center gap-3 animate-fade-in delay-700">
             <div className="flex -space-x-2">
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-cyan-600 border-2 border-dark-900"></div>
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-dark-900"></div>

@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import { Github, ExternalLink } from 'lucide-react'
 import { portfolioProjects } from '@/data/portfolioProjects'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 type FilterType = 'all' | 'website' | 'mobile'
 
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all')
+  const ref = useScrollAnimation()
 
   const filteredProjects =
     activeFilter === 'all'
@@ -15,14 +17,14 @@ export default function ProjectsSection() {
       : portfolioProjects.filter((project) => project.category === activeFilter)
 
   return (
-    <section className="py-20 px-6">
+    <section className="py-20 px-6" ref={ref}>
       <div className="max-w-6xl mx-auto">
         <div className="mb-12">
-          <p className="text-sm uppercase tracking-wider text-gray-400 mb-2">MY WORK</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">Projects.</h2>
+          <p className="text-sm uppercase tracking-wider text-gray-400 mb-2 animate-fade-in-down">MY WORK</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 animate-fade-in-up delay-100">Projects.</h2>
 
           {/* Filter tabs */}
-          <div className="flex gap-4 flex-wrap">
+          <div className="flex gap-4 flex-wrap animate-fade-in-up delay-200">
             <button
               onClick={() => setActiveFilter('all')}
               className={`px-6 py-2 rounded-lg font-medium transition-all ${
@@ -58,10 +60,12 @@ export default function ProjectsSection() {
 
         {/* Projects grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, index) => {
+            const delays = ['delay-100', 'delay-200', 'delay-300', 'delay-400', 'delay-500']
+            return (
             <div
               key={project.id}
-              className="glass-card p-6 group hover:scale-[1.02] transition-all duration-300"
+              className={`glass-card p-6 group hover:scale-[1.02] transition-all duration-300 animate-scale-in ${delays[index % delays.length]}`}
             >
               {/* Project image placeholder */}
               <div className="bg-dark-800 rounded-lg mb-4 h-48 flex items-center justify-center overflow-hidden">
@@ -102,7 +106,7 @@ export default function ProjectsSection() {
                 )}
               </div>
             </div>
-          ))}
+          )})}
         </div>
       </div>
     </section>

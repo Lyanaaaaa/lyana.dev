@@ -1,8 +1,10 @@
 'use client'
 
 import { Github, Linkedin, Mail, Instagram } from 'lucide-react'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 export default function Footer() {
+  const ref = useScrollAnimation()
   const socialLinks = [
     {
       name: 'GitHub',
@@ -56,11 +58,11 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative border-t border-white/10">
+    <footer className="relative border-t border-white/10" ref={ref}>
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
-          <div>
+          <div className="animate-fade-in-up">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center">
                 <span className="text-white font-bold text-lg">L</span>
@@ -74,28 +76,31 @@ export default function Footer() {
           </div>
 
           {/* Footer Links */}
-          {footerLinks.map((section) => (
-            <div key={section.title}>
-              <h4 className="text-white font-semibold mb-4">{section.title}</h4>
-              <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-gray-400 hover:text-primary transition-colors text-sm"
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {footerLinks.map((section, index) => {
+            const delays = ['delay-100', 'delay-200', 'delay-300']
+            return (
+              <div key={section.title} className={`animate-fade-in-up ${delays[index]}`}>
+                <h4 className="text-white font-semibold mb-4">{section.title}</h4>
+                <ul className="space-y-2">
+                  {section.links.map((link) => (
+                    <li key={link.name}>
+                      <a
+                        href={link.href}
+                        className="text-gray-400 hover:text-primary transition-colors text-sm"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          })}
         </div>
 
         {/* Bottom section */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10">
-          <div className="flex items-center gap-6 mb-4 md:mb-0">
+          <div className="flex items-center gap-6 mb-4 md:mb-0 animate-fade-in delay-400">
             {socialLinks.map((link) => {
               const Icon = link.icon
               return (
@@ -116,7 +121,7 @@ export default function Footer() {
           {/* Scroll to top button */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-10 h-10 rounded-full bg-dark-800 hover:bg-primary transition-all duration-300 flex items-center justify-center group"
+            className="w-10 h-10 rounded-full bg-dark-800 hover:bg-primary transition-all duration-300 flex items-center justify-center group animate-scale-in delay-500"
             aria-label="Scroll to top"
           >
             <svg

@@ -2,8 +2,10 @@
 
 import { useState } from 'react'
 import { Send, Mail, Clock } from 'lucide-react'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 export default function Contact() {
+  const ref = useScrollAnimation()
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -43,19 +45,19 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section relative">
+    <section id="contact" className="section relative" ref={ref}>
       <div className="container">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in-down">
               Let&apos;s Work Together
             </h2>
-            <p className="text-xl text-gray-300">
+            <p className="text-xl text-gray-300 animate-fade-in-up delay-100">
               Whether you need a full product built, a specific feature shipped, or technical guidance—I&apos;m available for project work and contract roles.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 animate-fade-in-up delay-200">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
                 Your Name
@@ -114,7 +116,7 @@ export default function Contact() {
             </button>
 
             {status === 'success' && (
-              <div className="p-4 rounded-lg text-center" style={{
+              <div className="p-4 rounded-lg text-center animate-fade-in" style={{
                 background: 'rgba(6, 182, 212, 0.1)',
                 border: '1px solid rgba(6, 182, 212, 0.3)',
                 color: '#67e8f9',
@@ -124,7 +126,7 @@ export default function Contact() {
             )}
 
             {status === 'error' && (
-              <div className="p-4 rounded-lg text-center" style={{
+              <div className="p-4 rounded-lg text-center animate-fade-in" style={{
                 background: 'rgba(239, 68, 68, 0.1)',
                 border: '1px solid rgba(239, 68, 68, 0.3)',
                 color: '#fca5a5',
@@ -135,23 +137,35 @@ export default function Contact() {
           </form>
 
           <div className="mt-12 grid sm:grid-cols-2 gap-6">
-            <div className="glass-card flex items-start gap-3">
-              <Mail className="w-6 h-6 text-primary-400 flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-white mb-1">Prefer email?</h3>
-                <a href="mailto:your.email@example.com" className="text-primary-400 hover:text-primary-300 transition-colors">
-                  your.email@example.com
-                </a>
+            {[
+              {
+                icon: Mail,
+                title: 'Prefer email?',
+                content: 'your.email@example.com',
+                href: 'mailto:your.email@example.com',
+                delay: 'delay-300'
+              },
+              {
+                icon: Clock,
+                title: 'Response time',
+                content: 'Within 24 hours',
+                delay: 'delay-400'
+              }
+            ].map((item, index) => (
+              <div key={index} className={`glass-card flex items-start gap-3 animate-scale-in ${item.delay}`}>
+                <item.icon className="w-6 h-6 text-primary-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold text-white mb-1">{item.title}</h3>
+                  {item.href ? (
+                    <a href={item.href} className="text-primary-400 hover:text-primary-300 transition-colors">
+                      {item.content}
+                    </a>
+                  ) : (
+                    <p className="text-gray-300">{item.content}</p>
+                  )}
+                </div>
               </div>
-            </div>
-
-            <div className="glass-card flex items-start gap-3">
-              <Clock className="w-6 h-6 text-primary-400 flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-white mb-1">Response time</h3>
-                <p className="text-gray-300">Within 24 hours</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

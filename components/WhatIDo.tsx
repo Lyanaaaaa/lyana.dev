@@ -1,6 +1,10 @@
+'use client'
+
 import { Code2, Layers, TrendingUp, Briefcase } from 'lucide-react'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 export default function WhatIDo() {
+  const ref = useScrollAnimation()
   const services = [
     {
       icon: Code2,
@@ -29,15 +33,17 @@ export default function WhatIDo() {
   ]
 
   return (
-    <section className="section relative">
+    <section className="section relative" ref={ref}>
       <div className="container">
         <div className="content">
           <div className="text-center mb-16">
-            <p className="text-sm uppercase tracking-wider text-primary mb-3">INTRODUCTION</p>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 gradient-text-static">
+            <p className="text-sm uppercase tracking-wider text-primary mb-3 animate-fade-in-down">
+              INTRODUCTION
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 gradient-text-static animate-fade-in-up delay-100">
               What I Do
             </h2>
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-200">
               I specialize in crafting digital experiences that blend beautiful design with powerful
               functionality. From concept to deployment, I build solutions that make an impact.
             </p>
@@ -46,10 +52,11 @@ export default function WhatIDo() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => {
               const Icon = service.icon
+              const delays = ['delay-100', 'delay-200', 'delay-300', 'delay-400']
               return (
                 <div
                   key={index}
-                  className="glass-card text-center group p-8 hover:scale-105 transition-all duration-300"
+                  className={`glass-card text-center group p-8 hover:scale-105 transition-all duration-300 animate-scale-in ${delays[index]}`}
                 >
                   <div
                     className="inline-flex items-center justify-center w-16 h-16 rounded-xl mb-6 transition-all duration-300 bg-gradient-to-br from-primary/20 to-purple-500/20"
