@@ -43,21 +43,21 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section bg-white">
+    <section id="contact" className="section relative">
       <div className="container">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Let&apos;s Work Together
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-300">
               Whether you need a full product built, a specific feature shipped, or technical guidance—I&apos;m available for project work and contract roles.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
                 Your Name
               </label>
               <input
@@ -67,13 +67,13 @@ export default function Contact() {
                 value={formState.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-shadow"
+                className="glass-input"
                 placeholder="John Smith"
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
                 Email
               </label>
               <input
@@ -83,13 +83,13 @@ export default function Contact() {
                 value={formState.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-shadow"
+                className="glass-input"
                 placeholder="john@company.com"
               />
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
                 What do you need help with?
               </label>
               <textarea
@@ -99,7 +99,7 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 rows={6}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-shadow resize-none"
+                className="glass-input resize-none"
                 placeholder="Tell me about your project, timeline, and goals..."
               />
             </div>
@@ -114,34 +114,42 @@ export default function Contact() {
             </button>
 
             {status === 'success' && (
-              <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800 text-center">
+              <div className="p-4 rounded-lg text-center" style={{
+                background: 'rgba(6, 182, 212, 0.1)',
+                border: '1px solid rgba(6, 182, 212, 0.3)',
+                color: '#67e8f9',
+              }}>
                 Thanks! I&apos;ll get back to you within 24 hours.
               </div>
             )}
 
             {status === 'error' && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 text-center">
+              <div className="p-4 rounded-lg text-center" style={{
+                background: 'rgba(239, 68, 68, 0.1)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                color: '#fca5a5',
+              }}>
                 Something went wrong. Please try emailing me directly.
               </div>
             )}
           </form>
 
           <div className="mt-12 grid sm:grid-cols-2 gap-6">
-            <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
-              <Mail className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
+            <div className="glass-card flex items-start gap-3">
+              <Mail className="w-6 h-6 text-primary-400 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="font-semibold text-gray-900 mb-1">Prefer email?</h3>
-                <a href="mailto:your.email@example.com" className="text-primary-600 hover:text-primary-700">
+                <h3 className="font-semibold text-white mb-1">Prefer email?</h3>
+                <a href="mailto:your.email@example.com" className="text-primary-400 hover:text-primary-300 transition-colors">
                   your.email@example.com
                 </a>
               </div>
             </div>
 
-            <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
-              <Clock className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
+            <div className="glass-card flex items-start gap-3">
+              <Clock className="w-6 h-6 text-primary-400 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="font-semibold text-gray-900 mb-1">Response time</h3>
-                <p className="text-gray-600">Within 24 hours</p>
+                <h3 className="font-semibold text-white mb-1">Response time</h3>
+                <p className="text-gray-300">Within 24 hours</p>
               </div>
             </div>
           </div>

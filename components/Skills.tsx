@@ -21,29 +21,34 @@ export default function Skills() {
   ]
 
   return (
-    <section className="section bg-gray-50">
+    <section className="section relative">
       <div className="container">
         <div className="content">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Skills & Tools
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-300">
               Technologies I use to solve problems
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {skills.map((skillGroup, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 border border-gray-200">
-                <h3 className="text-lg font-semibold mb-4 text-gray-900">
+              <div key={index} className="glass-card">
+                <h3 className="text-lg font-semibold mb-4 text-white">
                   {skillGroup.category}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {skillGroup.items.map((skill, skillIndex) => (
                     <span
                       key={skillIndex}
-                      className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-mono"
+                      className="px-3 py-1.5 rounded-lg text-sm font-mono transition-all duration-200 hover:scale-105"
+                      style={{
+                        background: 'rgba(6, 182, 212, 0.1)',
+                        border: '1px solid rgba(6, 182, 212, 0.2)',
+                        color: '#67e8f9',
+                      }}
                     >
                       {skill}
                     </span>
@@ -54,7 +59,7 @@ export default function Skills() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-gray-600">
+            <p className="text-gray-400">
               Always learning and adapting to the right tool for the job
             </p>
           </div>
