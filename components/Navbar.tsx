@@ -18,6 +18,18 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMobileMenuOpen])
+
   const navLinks = [
     { name: 'Overview', href: '#overview' },
     { name: 'Experience', href: '#experience' },
@@ -47,7 +59,7 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <span className="text-white font-bold text-lg hidden sm:block">Lyana A</span>
+            <span className="text-white font-bold md:text-sm text-lg hidden sm:block">Lyana A</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -58,7 +70,7 @@ export default function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`text-gray-300 hover:text-primary transition-colors font-medium animate-fade-in-down ${delays[index]}`}
+                  className={`text-gray-300 md:text-sm hover:text-primary transition-colors font-medium animate-fade-in-down ${delays[index]}`}
                 >
                   {link.name}
                 </a>
@@ -75,37 +87,93 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white p-2"
+            className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-110"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6 text-primary" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-dark-900/95 backdrop-blur-lg border-b border-white/10">
-            <div className="flex flex-col gap-4 px-6 py-6">
-              {navLinks.map((link) => (
+        {/* Mobile Menu - Full Screen Overlay */}
+        <div
+          className={`md:hidden fixed inset-0 z-40 transition-all duration-500 ${
+            isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
+          style={{
+            background: 'linear-gradient(135deg, black 0%, #0f1724 50%, black 100%)',
+          }}
+        >
+          {/* Close Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="absolute top-6 right-6 text-white p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-110 z-50"
+            aria-label="Close menu"
+            style={{
+              animation: isMobileMenuOpen ? 'scale-in 0.3s ease-out 0.2s both' : 'none',
+            }}
+          >
+            <X className="w-6 h-6 text-primary" />
+          </button>
+
+          <div className="flex flex-col items-center justify-center h-full px-6">
+            <div className="flex flex-col items-center gap-6 w-full max-w-sm">
+              {navLinks.map((link, index) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-gray-300 hover:text-primary transition-colors font-medium"
+                  className="text-gray-300 hover:text-primary hover:bg-white/5 transition-all duration-300 font-medium px-6 py-4 rounded-lg group w-full text-center text-lg"
+                  style={{
+                    animation: isMobileMenuOpen
+                      ? `fade-in-up 0.4s ease-out ${index * 0.1 + 0.3}s both`
+                      : 'none',
+                  }}
                 >
-                  {link.name}
+                  <span className="flex items-center justify-center gap-2">
+                    <span className="w-0 group-hover:w-2 h-0.5 bg-primary transition-all duration-300"></span>
+                    {link.name}
+                  </span>
                 </a>
               ))}
               <a
                 href="#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="btn-primary px-6 py-2 text-sm text-center"
+                className="btn-primary px-8 py-4 text-base text-center mt-4 w-full"
+                style={{
+                  animation: isMobileMenuOpen
+                    ? `fade-in-up 0.4s ease-out ${navLinks.length * 0.1 + 0.3}s both`
+                    : 'none',
+                }}
               >
                 Contact
               </a>
+
+              {/* Avatar at Bottom */}
+              <div
+                className="mt-8"
+                style={{
+                  animation: isMobileMenuOpen
+                    ? `fade-in-up 0.4s ease-out ${navLinks.length * 0.1 + 0.4}s both`
+                    : 'none',
+                }}
+              >
+                <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-primary/30 hover:ring-primary/50 transition-all hover:scale-110">
+                  <Image
+                    src="resources/avatar.png"
+                    alt="Lyana A"
+                    width={80}
+                    height={80}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   )

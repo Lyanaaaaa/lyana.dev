@@ -62,8 +62,8 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
-          <div className="animate-fade-in-up">
-            <div className="flex items-center gap-3 mb-4">
+          <div className="animate-fade-in-up text-center md:text-left">
+            <div className="flex flex-col md:flex-row items-center gap-3 mb-4">
               {/* <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center">
                 <span className="text-white font-bold text-lg">LA</span>
               </div> */}
@@ -79,9 +79,9 @@ export default function Footer() {
           {footerLinks.map((section, index) => {
             const delays = ['delay-100', 'delay-200', 'delay-300']
             return (
-              <div key={section.title} className={`animate-fade-in-up ${delays[index]}`}>
+              <div key={section.title} className={`animate-fade-in-up ${delays[index]} text-center md:text-left`}>
                 <h4 className="text-white font-semibold mb-4">{section.title}</h4>
-                <ul className="space-y-2">
+                <ul className="space-y-2 flex flex-col items-center md:items-start">
                   {section.links.map((link) => (
                     <li key={link.name}>
                       <a
@@ -99,8 +99,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom section */}
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10">
-          <div className="flex items-center gap-6 mb-4 md:mb-0 animate-fade-in delay-400">
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10 gap-4">
+          <div className="flex items-center gap-6 animate-fade-in delay-400">
             {socialLinks.map((link) => {
               const Icon = link.icon
               return (
