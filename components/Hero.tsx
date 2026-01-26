@@ -70,7 +70,7 @@ export default function Hero() {
 
           {/* Subtitle */}
           <p className="text-md md:text-lg text-gray-300 mb-28 max-w-2xl leading-relaxed animate-fade-in-up delay-400">
-          Software developer crafting exceptional digital experiences with
+          Software developer crafting decent digital experiences with
             <span className="text-primary font-semibold"> clean code</span> and
             <span className="text-primary font-semibold"> innovative solutions</span>.
           </p>

@@ -37,8 +37,15 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group animate-fade-in-left delay-100">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span className="text-white font-bold text-lg">L</span>
+            <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20 group-hover:ring-primary/40 group-hover:scale-110 transition-all">
+              <Image
+                src="resources/avatar.png"
+                alt="Lyana A"
+                width={40}
+                height={40}
+                className="object-cover w-full h-full"
+                priority
+              />
             </div>
             <span className="text-white font-bold text-lg hidden sm:block">Lyana A</span>
           </Link>

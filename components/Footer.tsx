@@ -18,7 +18,7 @@ export default function Footer() {
     },
     {
       name: 'Instagram',
-      href: 'https://instagram.com/lyanaaqilah',
+      href: 'https://instagram.com/lyana_qillah',
       icon: Instagram,
     },
     {
@@ -41,18 +41,18 @@ export default function Footer() {
     {
       title: 'Projects',
       links: [
-        { name: 'MovieBites', href: '#' },
-        { name: 'DreamId', href: '#' },
-        { name: 'Weavify', href: '#' },
-        { name: 'Location App', href: '#' },
+        { name: 'Atlas', href: '#projects' },
+        { name: 'AquaStruct Engineer Pro', href: '#projects' },
+        { name: 'Autorentic', href: '#projects' },
+        { name: 'Mr Count', href: '#projects' },
       ],
     },
     {
-      title: 'Connect',
+      title: 'Give man a fish & feed him for a day. Teach man to fish & feed him for a lifetime. Teach a man to cycle & he will realize fishing is stupid and boring.',
       links: [
-        { name: 'GitHub', href: 'https://github.com/Lyanaaaaa' },
-        { name: 'LinkedIn', href: 'https://linkedin.com/in/lyanaaqilah' },
-        { name: 'Email', href: 'mailto:nurlyanaaqilah@gmail.com' },
+        // { name: 'GitHub', href: 'https://github.com/Lyanaaaaa' },
+        // { name: 'LinkedIn', href: 'https://linkedin.com/in/lyanaaqilah' },
+        // { name: 'Email', href: 'mailto:nurlyanaaqilah@gmail.com' },
       ],
     },
   ]
@@ -64,13 +64,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="animate-fade-in-up">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">L</span>
-              </div>
+              {/* <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center">
+                <span className="text-white font-bold text-lg">LA</span>
+              </div> */}
               <div>
-                <h3 className="text-white font-bold">Lyana Aqilah</h3>
-                <p className="text-xs text-gray-400">nurlyanaaqilah@gmail.com</p>
-                <p className="text-xs text-gray-400">+60 19 409 0597</p>
+                <h3 className="text-white font-bold">Let's Build Together</h3>
+                {/* <p className="text-xs text-gray-400">nurlyanaaqilah@gmail.com</p> */}
+                <h3 className="text-xs text-gray-400 mt-5">+60 19 409 0597</h3>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function Footer() {
           {/* Scroll to top button */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-10 h-10 rounded-full bg-dark-800 hover:bg-primary transition-all duration-300 flex items-center justify-center group animate-scale-in delay-500"
+            className="w-10 h-10 rounded-full bg-dark-800/20 hover:bg-primary transition-all duration-300 flex items-center justify-center group animate-scale-in delay-500"
             aria-label="Scroll to top"
           >
             <svg

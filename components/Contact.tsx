@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Send, Mail, Clock } from 'lucide-react'
+import { Phone, Mail, Clock, Instagram } from 'lucide-react'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 export default function Contact() {
@@ -47,17 +47,17 @@ export default function Contact() {
   return (
     <section id="contact" className="section relative" ref={ref}>
       <div className="container">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in-down">
               Let&apos;s Work Together
             </h2>
-            <p className="text-xl text-gray-300 animate-fade-in-up delay-100">
-              Whether you need a full product built, a specific feature shipped, or technical guidance—I&apos;m available for project work and contract roles.
+            <p className="text-md text-gray-300 animate-fade-in-up delay-100">
+              Whether you need a full product built, a specific feature shipped, or technical collabolation, I'm available for project work and contract roles.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6 animate-fade-in-up delay-200">
+          {/* <form onSubmit={handleSubmit} className="space-y-6 animate-fade-in-up delay-200">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
                 Your Name
@@ -112,7 +112,6 @@ export default function Contact() {
               className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {status === 'submitting' ? 'Sending...' : 'Send Message'}
-              <Send className="w-5 h-5" />
             </button>
 
             {status === 'success' && (
@@ -134,16 +133,30 @@ export default function Contact() {
                 Something went wrong. Please try emailing me directly.
               </div>
             )}
-          </form>
+          </form> */}
 
           <div className="mt-12 grid sm:grid-cols-2 gap-6">
             {[
               {
+                icon: Phone,
+                title: 'iMessage or WhatsApp me!',
+                content: 'WhatsApp Link',
+                href: 'https://wa.link/uqgo8y',
+                delay: 'delay-300'
+              },
+              {
                 icon: Mail,
                 title: 'Prefer email?',
-                content: 'your.email@example.com',
-                href: 'mailto:your.email@example.com',
+                content: 'nurlyanaaqilah@gmail.com',
+                href: 'mailto:nurlyanaaqilah@gmail.com',
                 delay: 'delay-300'
+              },
+              {
+                icon: Instagram,
+                title: 'DM me also works!',
+                content: '@lyana_qillah',
+                href: 'https://www.instagram.com/lyana_qillah',
+                delay: 'delay-400'
               },
               {
                 icon: Clock,
@@ -153,11 +166,16 @@ export default function Contact() {
               }
             ].map((item, index) => (
               <div key={index} className={`glass-card flex items-start gap-3 animate-scale-in ${item.delay}`}>
-                <item.icon className="w-6 h-6 text-primary-400 flex-shrink-0 mt-1" />
+                <item.icon className="w-6 h-6 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold text-white mb-1">{item.title}</h3>
                   {item.href ? (
-                    <a href={item.href} className="text-primary-400 hover:text-primary-300 transition-colors">
+                    <a
+                      href={item.href}
+                      className="hover:text-primary-300 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {item.content}
                     </a>
                   ) : (

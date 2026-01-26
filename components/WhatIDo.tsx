@@ -37,10 +37,10 @@ export default function WhatIDo() {
       <div className="container">
         <div className="content">
           <div className="text-center mb-16">
-            <p className="text-sm uppercase tracking-wider text-primary mb-3 animate-fade-in-down">
+            {/* <p className="text-sm uppercase tracking-wider text-primary mb-3 animate-fade-in-down">
               WHAT I OFFER
-            </p>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 gradient-text-static animate-fade-in-up delay-100">
+            </p> */}
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 animate-fade-in-up delay-100">
               What I Do
             </h2>
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-200">
@@ -60,9 +60,6 @@ export default function WhatIDo() {
                 >
                   <div
                     className="inline-flex items-center justify-center w-16 h-16 rounded-xl mb-6 transition-all duration-300 bg-gradient-to-br from-primary/20 to-purple-500/20"
-                    style={{
-                      border: '1px solid rgba(6, 182, 212, 0.3)',
-                    }}
                   >
                     <Icon
                       className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300"

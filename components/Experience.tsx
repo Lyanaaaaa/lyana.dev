@@ -12,7 +12,7 @@ function ExperienceItem({ item, index }: { item: typeof experienceData[0]; index
   return (
     <div ref={itemRef} className="relative">
       {/* Timeline dot */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-dark-900 border-4 border-primary rounded-full flex items-center justify-center z-10 hidden md:flex">
+      <div className="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-dark-300/30 border-4 border-primary rounded-full flex items-center justify-center z-10 hidden md:flex">
         {item.type === 'education' ? (
           <GraduationCap className="w-6 h-6 text-primary" />
         ) : (

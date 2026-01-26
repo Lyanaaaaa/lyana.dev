@@ -87,11 +87,11 @@ export const experienceData: ExperienceItem[] = [
   },
   {
     type: 'education',
-    title: 'Pure Science Stream, SPM:8A1B',
+    title: 'Pure Science Stream',
     organization: 'SM Sains Selangor',
     period: '2012 - 2016',
     description: [
-      'Grade: SPM or Malaysian Certificate of Education or GSCE equivalent : 2A+ 4A 2A- 1B+',
+      'Grade: SPM or Malaysian Certificate of Education or GSCE equivalent : 8A1B | 2A+ 4A 2A- 1B+',
       'Activities and societies: Student Leadership Board (2014-2016) | School Prefect (2015-2016) | Guru Muda (2016)',
     ],
   },
