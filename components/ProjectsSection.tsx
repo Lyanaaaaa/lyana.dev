@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Github, ExternalLink } from 'lucide-react'
+import Image from 'next/image'
 import { portfolioProjects } from '@/data/portfolioProjects'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
@@ -67,9 +68,18 @@ export default function ProjectsSection() {
               key={project.id}
               className={`glass-card p-6 group hover:scale-[1.02] transition-all duration-300 animate-scale-in ${delays[index % delays.length]}`}
             >
-              {/* Project image placeholder */}
-              <div className="bg-dark-800 rounded-lg mb-4 h-48 flex items-center justify-center overflow-hidden">
-                <div className="text-gray-600 text-6xl font-bold">{project.title[0]}</div>
+              {/* Project image */}
+              <div className="bg-dark-800 rounded-lg mb-4 h-48 flex items-center justify-center overflow-hidden relative">
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                ) : (
+                  <div className="text-gray-600 text-6xl font-bold">{project.title[0]}</div>
+                )}
               </div>
 
               <h3 className="text-xl font-bold mb-2">{project.title}</h3>

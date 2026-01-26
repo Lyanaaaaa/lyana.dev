@@ -16,18 +16,26 @@ interface TechCategory {
 const techStackData = {
   frameworks: [
     { name: 'Laravel', icon: 'L' },
-    { name: 'ASP.NET', icon: '.NET' },
-    { name: 'Node.js', icon: 'N' },
     { name: 'Next.js', icon: 'N' },
+    { name: 'Node.js', icon: 'N' },
+    { name: 'React', icon: 'R' },
   ],
   languages: [
     { name: 'PHP', icon: 'PHP' },
-    { name: 'C#', icon: 'C#' },
+    { name: 'TypeScript', icon: 'TS' },
+    { name: 'JavaScript', icon: 'JS' },
+    { name: 'HTML/CSS', icon: 'H' },
   ],
   databases: [
-    { name: 'MySQL', icon: 'My' },
-    { name: 'MongoDB', icon: 'M' },
     { name: 'PostgreSQL', icon: 'P' },
+    { name: 'MySQL', icon: 'My' },
+    { name: 'Prisma ORM', icon: 'Pr' },
+  ],
+  tools: [
+    { name: 'tRPC', icon: 't' },
+    { name: 'Tailwind CSS', icon: 'T' },
+    { name: 'Bootstrap', icon: 'B' },
+    { name: 'Billplz', icon: 'BZ' },
   ],
 }
 
@@ -65,7 +73,7 @@ export default function TechStack() {
         {/* Frameworks Section */}
         <div className="mb-12">
           <h3 className="text-xl font-semibold mb-6 uppercase tracking-wider text-gray-400 animate-fade-in-left delay-300">
-            Frameworks
+            Frameworks & Libraries
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {techStackData.frameworks.map((tech, index) => {
@@ -85,19 +93,63 @@ export default function TechStack() {
         </div>
 
         {/* Languages Section */}
-        <div>
+        <div className="mb-12">
           <h3 className="text-xl font-semibold mb-6 uppercase tracking-wider text-gray-400 animate-fade-in-left delay-700">
             Languages
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {techStackData.languages.map((tech, index) => {
-              const delays = ['delay-700', 'delay-800']
+              const delays = ['delay-700', 'delay-800', 'delay-100', 'delay-200']
               return (
               <div
                 key={index}
                 className={`glass-card p-8 flex flex-col items-center justify-center min-h-[160px] group hover:scale-105 transition-all duration-300 animate-scale-in ${delays[index]}`}
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-4 text-2xl font-bold text-white group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-shadow">
+                  {tech.icon}
+                </div>
+                <p className="text-center font-medium">{tech.name}</p>
+              </div>
+            )})}
+          </div>
+        </div>
+
+        {/* Databases Section */}
+        <div className="mb-12">
+          <h3 className="text-xl font-semibold mb-6 uppercase tracking-wider text-gray-400 animate-fade-in-left delay-300">
+            Databases
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {techStackData.databases.map((tech, index) => {
+              const delays = ['delay-300', 'delay-400', 'delay-500']
+              return (
+              <div
+                key={index}
+                className={`glass-card p-8 flex flex-col items-center justify-center min-h-[160px] group hover:scale-105 transition-all duration-300 animate-scale-in ${delays[index]}`}
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 text-2xl font-bold text-white group-hover:shadow-lg group-hover:shadow-blue-500/50 transition-shadow">
+                  {tech.icon}
+                </div>
+                <p className="text-center font-medium">{tech.name}</p>
+              </div>
+            )})}
+          </div>
+        </div>
+
+        {/* Tools Section */}
+        <div>
+          <h3 className="text-xl font-semibold mb-6 uppercase tracking-wider text-gray-400 animate-fade-in-left delay-600">
+            Tools & Technologies
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {techStackData.tools.map((tech, index) => {
+              const delays = ['delay-600', 'delay-700', 'delay-800', 'delay-100']
+              return (
+              <div
+                key={index}
+                className={`glass-card p-8 flex flex-col items-center justify-center min-h-[160px] group hover:scale-105 transition-all duration-300 animate-scale-in ${delays[index]}`}
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-lg flex items-center justify-center mb-4 text-2xl font-bold text-white group-hover:shadow-lg group-hover:shadow-green-500/50 transition-shadow">
                   {tech.icon}
                 </div>
                 <p className="text-center font-medium">{tech.name}</p>

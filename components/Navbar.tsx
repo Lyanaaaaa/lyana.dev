@@ -29,7 +29,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-dark-900/80 backdrop-blur-lg border-b border-white/10'
+          ? 'bg-dark-100/40 backdrop-blur-lg border-b border-white/5'
           : 'bg-transparent'
       }`}
     >
@@ -40,7 +40,7 @@ export default function Navbar() {
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center group-hover:scale-110 transition-transform">
               <span className="text-white font-bold text-lg">L</span>
             </div>
-            <span className="text-white font-bold text-lg hidden sm:block">Lyana Aqilah</span>
+            <span className="text-white font-bold text-lg hidden sm:block">Lyana A</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -59,7 +59,7 @@ export default function Navbar() {
             })}
             <a
               href="#contact"
-              className="btn-primary px-6 py-2 text-sm animate-scale-in delay-600"
+              className="btn-primary text-sm animate-scale-in delay-600"
             >
               Contact
             </a>

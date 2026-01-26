@@ -70,7 +70,7 @@ export default function Footer() {
               <div>
                 <h3 className="text-white font-bold">Lyana Aqilah</h3>
                 <p className="text-xs text-gray-400">nurlyanaaqilah@gmail.com</p>
-                <p className="text-xs text-gray-400">+60 77582638</p>
+                <p className="text-xs text-gray-400">+60 19 409 0597</p>
               </div>
             </div>
           </div>

@@ -8,27 +8,27 @@ export default function WhatIDo() {
   const services = [
     {
       icon: Code2,
-      title: 'Full-Stack Development',
+      title: 'Backend Development',
       description:
-        'Building robust web applications with modern frameworks and best practices. From responsive frontends to scalable backends.',
+        'Build scalable APIs and databases with Laravel and Node.js. Role-based access, payment systems, optimized queries.',
     },
     {
       icon: Briefcase,
-      title: '5+ Project Experiences',
+      title: 'Fast Delivery',
       description:
-        'Successfully delivered diverse projects ranging from e-commerce platforms to real-time applications and management systems.',
+        'Shipped production systems in days, not months. From MVP to full-scale platforms with clean, maintainable code.',
     },
     {
       icon: TrendingUp,
-      title: 'SEO & Performance',
+      title: 'System Design',
       description:
-        'Optimizing websites for search engines and performance. Ensuring fast load times and excellent user experience.',
+        'Design databases, APIs, and workflows that scale. Focus on performance, security, and user experience.',
     },
     {
       icon: Layers,
-      title: 'Modern Tech Stack',
+      title: 'Modern Stack',
       description:
-        'Proficient in React, Next.js, Node.js, Laravel, and more. Always learning and adapting to new technologies.',
+        'Next.js, TypeScript, Laravel, PostgreSQL, tRPC, Billplz. Always learning, always shipping.',
     },
   ]
 
@@ -38,14 +38,14 @@ export default function WhatIDo() {
         <div className="content">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-wider text-primary mb-3 animate-fade-in-down">
-              INTRODUCTION
+              WHAT I OFFER
             </p>
             <h2 className="text-3xl md:text-5xl font-bold mb-6 gradient-text-static animate-fade-in-up delay-100">
               What I Do
             </h2>
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-200">
-              I specialize in crafting digital experiences that blend beautiful design with powerful
-              functionality. From concept to deployment, I build solutions that make an impact.
+              I build web applications that work. From backend APIs to full-stack platforms,
+              I deliver clean code and solid solutions.
             </p>
           </div>
 

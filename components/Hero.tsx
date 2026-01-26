@@ -39,7 +39,7 @@ export default function Hero() {
   }, [text, isDeleting, loopNum, typingSpeed, phrases])
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section className="min-h-screen mt-8 flex items-center justify-center relative overflow-hidden">
       {/* Animated background gradient orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
@@ -55,22 +55,22 @@ export default function Hero() {
       <div className="container mx-auto px-6 text-left relative z-10 animate-on-load">
         <div className="max-w-4xl">
           {/* Badge */}
-          <div className="badge-glass inline-flex mb-8 animate-fade-in-down delay-200">
+          {/* <div className="badge-glass inline-flex mb-8 animate-fade-in-down delay-200">
             <Atom className="w-4 h-4" />
             Available for new projects
-          </div>
+          </div> */}
 
           {/* Main Heading with Typing Effect */}
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-normal animate-fade-in-up delay-300">
-            Hi, I'm{' '}
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-4 leading-normal animate-fade-in-up delay-300">
+            Ola! I'm{' '}
             <br className="hidden sm:block" />
             <span className="gradient-text">{text}</span>
             <span className="animate-blink text-primary">|</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl leading-relaxed animate-fade-in-up delay-400">
-            Full-stack developer crafting exceptional digital experiences with
+          <p className="text-md md:text-lg text-gray-300 mb-28 max-w-2xl leading-relaxed animate-fade-in-up delay-400">
+          Software developer crafting exceptional digital experiences with
             <span className="text-primary font-semibold"> clean code</span> and
             <span className="text-primary font-semibold"> innovative solutions</span>.
           </p>
@@ -94,14 +94,14 @@ export default function Hero() {
           </div>
 
           {/* Trust Badge */}
-          <div className="mt-16 flex items-center gap-3 animate-fade-in delay-700">
-            <div className="flex -space-x-2">
+          <div className="mt-8 flex items-center gap-3 animate-fade-in delay-700">
+            {/* <div className="flex -space-x-2">
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-cyan-600 border-2 border-dark-900"></div>
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-dark-900"></div>
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 border-2 border-dark-900"></div>
-            </div>
-            <p className="text-sm text-gray-400">
-              Trusted by startups and established businesses
+            </div> */}
+            <p className="text-xs text-gray-400">
+              Trusted by startups and established businesses.
             </p>
           </div>
         </div>
