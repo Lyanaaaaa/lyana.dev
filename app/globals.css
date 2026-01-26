@@ -118,12 +118,14 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .glass-card:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(6, 182, 212, 0.3);
-    transform: translateY(-4px);
+    transform: translateY(-4px) translateZ(0);
     box-shadow: 0 12px 40px rgba(6, 182, 212, 0.1);
   }
 
@@ -284,42 +286,50 @@
   animation: fade-in 0.6s ease-out forwards;
   animation-play-state: paused;
   opacity: 0;
+  will-change: opacity;
 }
 
 .animate-fade-in-up {
   animation: fade-in-up 0.8s ease-out forwards;
   animation-play-state: paused;
   opacity: 0;
+  will-change: opacity, transform;
 }
 
 .animate-fade-in-down {
   animation: fade-in-down 0.8s ease-out forwards;
   animation-play-state: paused;
   opacity: 0;
+  will-change: opacity, transform;
 }
 
 .animate-fade-in-left {
   animation: fade-in-left 0.8s ease-out forwards;
   animation-play-state: paused;
   opacity: 0;
+  will-change: opacity, transform;
 }
 
 .animate-fade-in-right {
   animation: fade-in-right 0.8s ease-out forwards;
   animation-play-state: paused;
   opacity: 0;
+  will-change: opacity, transform;
 }
 
 .animate-scale-in {
   animation: scale-in 0.6s ease-out forwards;
   animation-play-state: paused;
   opacity: 0;
+  will-change: opacity, transform;
+  transform: translateZ(0);
 }
 
 .animate-slide-in-up {
   animation: slide-in-up 1s ease-out forwards;
   animation-play-state: paused;
   opacity: 0;
+  will-change: opacity, transform;
 }
 
 /* Play animation when visible - triggered by Intersection Observer */
@@ -338,6 +348,26 @@
 .animate-visible.animate-scale-in,
 .animate-visible.animate-slide-in-up {
   animation-play-state: running;
+}
+
+/* Remove will-change after animations complete for better performance */
+.animate-visible .animate-fade-in:not(:hover),
+.animate-visible .animate-fade-in-up:not(:hover),
+.animate-visible .animate-fade-in-down:not(:hover),
+.animate-visible .animate-fade-in-left:not(:hover),
+.animate-visible .animate-fade-in-right:not(:hover),
+.animate-visible .animate-scale-in:not(:hover),
+.animate-visible .animate-slide-in-up:not(:hover) {
+  animation-fill-mode: forwards;
+}
+
+/* Optimize group hover performance */
+.group:hover .group-hover\:scale-105 {
+  will-change: transform;
+}
+
+.group:not(:hover) .group-hover\:scale-105 {
+  will-change: auto;
 }
 
 /* Immediate animations for hero/navbar (always visible on load) */
