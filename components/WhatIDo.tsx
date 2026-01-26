@@ -1,51 +1,73 @@
-import { Target, Zap, Wrench } from 'lucide-react'
+'use client'
+
+import { Code2, Layers, TrendingUp, Briefcase } from 'lucide-react'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 export default function WhatIDo() {
+  const ref = useScrollAnimation()
   const services = [
     {
-      icon: Target,
-      title: 'Product Development',
-      description: 'Turn ideas into launched applications. I handle front-end, back-end, deployment, and the messy middle.',
+      icon: Code2,
+      title: 'Backend Development',
+      description:
+        'Build scalable APIs and databases with Laravel and Node.js. Role-based access, payment systems, optimized queries.',
     },
     {
-      icon: Zap,
-      title: 'Workflow Automation',
-      description: 'Build tools that eliminate repetitive tasks. Your team spends time on strategy, not spreadsheets.',
+      icon: Briefcase,
+      title: 'Fast Delivery',
+      description:
+        'Shipped production systems in days, not months. From MVP to full-scale platforms with clean, maintainable code.',
     },
     {
-      icon: Wrench,
-      title: 'Technical Problem-Solving',
-      description: 'Debug complex issues, optimize slow systems, and make existing codebases maintainable.',
+      icon: TrendingUp,
+      title: 'System Design',
+      description:
+        'Design databases, APIs, and workflows that scale. Focus on performance, security, and user experience.',
+    },
+    {
+      icon: Layers,
+      title: 'Modern Stack',
+      description:
+        'Next.js, TypeScript, Laravel, PostgreSQL, tRPC, Billplz. Always learning, always shipping.',
     },
   ]
 
   return (
-    <section className="section bg-white">
+    <section className="section relative" ref={ref}>
       <div className="container">
         <div className="content">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              What I Actually Do
+            {/* <p className="text-sm uppercase tracking-wider text-primary mb-3 animate-fade-in-down">
+              WHAT I OFFER
+            </p> */}
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 animate-fade-in-up delay-100">
+              What I Do
             </h2>
-            <p className="text-xl text-gray-600">
-              I don&apos;t just write code—I ship products that make money, save time, or improve user experience.
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-200">
+              I build web applications that work. From backend APIs to full-stack platforms,
+              I deliver clean code and solid solutions.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => {
               const Icon = service.icon
+              const delays = ['delay-100', 'delay-200', 'delay-300', 'delay-400']
               return (
-                <div key={index} className="text-center">
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary-100 text-primary-600 mb-6">
-                    <Icon className="w-7 h-7" strokeWidth={2} />
+                <div
+                  key={index}
+                  className={`glass-card text-center group p-8 hover:scale-105 transition-all duration-300 animate-scale-in ${delays[index]}`}
+                >
+                  <div
+                    className="inline-flex items-center justify-center w-16 h-16 rounded-xl mb-6 transition-all duration-300 bg-gradient-to-br from-primary/20 to-purple-500/20"
+                  >
+                    <Icon
+                      className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300"
+                      strokeWidth={2}
+                    />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {service.description}
-                  </p>
+                  <h3 className="text-xl font-semibold mb-3 text-white">{service.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
                 </div>
               )
             })}

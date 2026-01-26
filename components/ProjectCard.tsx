@@ -7,22 +7,22 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="card group">
+    <div className="glass-card group">
       <div className="flex items-start justify-between mb-4">
         <div>
-          <div className="text-sm font-medium text-primary-600 mb-2">
+          <div className="text-sm font-medium text-primary-400 mb-2">
             {project.category}
           </div>
-          <h3 className="text-2xl font-bold mb-2 group-hover:text-primary-600 transition-colors">
+          <h3 className="text-2xl font-bold mb-2 group-hover:text-primary-400 transition-colors">
             {project.title}
           </h3>
         </div>
         {project.link && (
-          <a 
+          <a
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-primary-600 transition-colors"
+            className="text-gray-400 hover:text-primary-400 transition-colors"
             aria-label="View project"
           >
             <ExternalLink className="w-5 h-5" />
@@ -32,21 +32,21 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       <div className="space-y-6">
         <div>
-          <h4 className="text-sm font-semibold text-gray-900 mb-2">Problem</h4>
-          <p className="text-gray-600 leading-relaxed">{project.problem}</p>
+          <h4 className="text-sm font-semibold text-white mb-2">Problem</h4>
+          <p className="text-gray-300 leading-relaxed">{project.problem}</p>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-gray-900 mb-2">What I Built</h4>
-          <p className="text-gray-600 leading-relaxed">{project.solution}</p>
+          <h4 className="text-sm font-semibold text-white mb-2">What I Built</h4>
+          <p className="text-gray-300 leading-relaxed">{project.solution}</p>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-gray-900 mb-3">Impact</h4>
+          <h4 className="text-sm font-semibold text-white mb-3">Impact</h4>
           <ul className="space-y-2">
             {project.impact.map((item, index) => (
-              <li key={index} className="flex items-start gap-2 text-gray-600">
-                <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+              <li key={index} className="flex items-start gap-2 text-gray-300">
+                <CheckCircle2 className="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" />
                 <span>{item}</span>
               </li>
             ))}
@@ -58,7 +58,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {project.tech.map((tech, index) => (
               <span
                 key={index}
-                className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-md font-mono"
+                className="px-3 py-1 text-sm rounded-md font-mono"
+                style={{
+                  background: 'rgba(6, 182, 212, 0.1)',
+                  border: '1px solid rgba(6, 182, 212, 0.2)',
+                  color: '#67e8f9',
+                }}
               >
                 {tech}
               </span>

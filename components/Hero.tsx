@@ -1,37 +1,108 @@
-import { ArrowRight, ChevronDown } from 'lucide-react'
+'use client'
+
+import { ArrowRight, ChevronDown, Atom } from 'lucide-react'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import PolyhedraBackground from './PolyhedraBackground'
 
 export default function Hero() {
-  return (
-    <section className="section min-h-[90vh] flex items-center justify-center bg-gradient-to-b from-gray-50 to-white">
-      <div className="container text-center">
-        <div className="max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-sm font-medium mb-8">
-            <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
-            Available for new projects
-          </div>
+  const [text, setText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [loopNum, setLoopNum] = useState(0)
+  const [typingSpeed, setTypingSpeed] = useState(150)
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance">
-            I Build Software That Solves Real Business Problems
+  const phrases = ['Lyana Aqilah', 'a Software Engineer', 'Full-Stack Developer']
+
+  useEffect(() => {
+    const handleType = () => {
+      const i = loopNum % phrases.length
+      const fullText = phrases[i]
+
+      setText(
+        isDeleting
+          ? fullText.substring(0, text.length - 1)
+          : fullText.substring(0, text.length + 1)
+      )
+
+      setTypingSpeed(isDeleting ? 50 : 150)
+
+      if (!isDeleting && text === fullText) {
+        setTimeout(() => setIsDeleting(true), 2000)
+      } else if (isDeleting && text === '') {
+        setIsDeleting(false)
+        setLoopNum(loopNum + 1)
+      }
+    }
+
+    const timer = setTimeout(handleType, typingSpeed)
+    return () => clearTimeout(timer)
+  }, [text, isDeleting, loopNum, typingSpeed, phrases])
+
+  return (
+    <section className="min-h-screen mt-8 flex items-center justify-center relative overflow-hidden">
+      {/* Animated background gradient orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+        <div
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: '1s' }}
+        ></div>
+      </div>
+
+      {/* 3D Polyhedra Animation Background */}
+      <PolyhedraBackground />
+
+      <div className="container mx-auto px-6 text-left relative z-10 animate-on-load">
+        <div className="max-w-4xl">
+          {/* Badge */}
+          {/* <div className="badge-glass inline-flex mb-8 animate-fade-in-down delay-200">
+            <Atom className="w-4 h-4" />
+            Available for new projects
+          </div> */}
+
+          {/* Main Heading with Typing Effect */}
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-4 leading-normal animate-fade-in-up delay-300">
+            Ola! I'm{' '}
+            <br className="hidden sm:block" />
+            <span className="gradient-text">{text}</span>
+            <span className="animate-blink text-primary">|</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto text-balance">
-            Full-stack engineer specializing in customer-facing web apps, workflow automation, and systems that scale without drama.
+          {/* Subtitle */}
+          <p className="text-md md:text-lg text-gray-300 mb-28 max-w-2xl leading-relaxed animate-fade-in-up delay-400">
+          Software developer crafting decent digital experiences with
+            <span className="text-primary font-semibold"> clean code</span> and
+            <span className="text-primary font-semibold"> innovative solutions</span>.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="#contact" className="btn-primary w-full sm:w-auto">
-              Start a Project
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link href="#work" className="btn-secondary w-full sm:w-auto">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-start gap-4 animate-fade-in-up delay-500">
+            <Link
+              href="#projects"
+              className="btn-primary group"
+            >
               View My Work
-              <ChevronDown className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link
+              href="#contact"
+              className="btn-secondary group"
+            >
+              Get In Touch
+              <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
             </Link>
           </div>
 
-          <div className="mt-16 text-sm text-gray-500">
-            <p>Trusted by startups and established businesses</p>
+          {/* Trust Badge */}
+          <div className="mt-8 flex items-center gap-3 animate-fade-in delay-700">
+            {/* <div className="flex -space-x-2">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-cyan-600 border-2 border-dark-900"></div>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-dark-900"></div>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 border-2 border-dark-900"></div>
+            </div> */}
+            <p className="text-xs text-gray-400">
+              Trusted by startups and established businesses.
+            </p>
           </div>
         </div>
       </div>

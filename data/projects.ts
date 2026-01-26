@@ -14,19 +14,19 @@ export const projects: Project[] = [
     ],
     tech: ['React', 'Node.js', 'MongoDB', 'REST APIs'],
   },
-  {
-    id: 'marketplace-platform',
-    title: 'Multi-Vendor Marketplace Platform',
-    category: 'Product Development',
-    problem: 'Local artisan community had no centralized place to sell online. Existing solutions were too expensive or complex.',
-    solution: 'Custom marketplace with vendor onboarding, product listings, payment processing, and automated order management.',
-    impact: [
-      'Launched with 40 vendors in first month',
-      'Processed $50k in transactions in 90 days',
-      'Reduced vendor setup time from days to 15 minutes',
-    ],
-    tech: ['Next.js', 'Stripe Connect', 'PostgreSQL', 'Vercel'],
-  },
+  // {
+  //   id: 'marketplace-platform',
+  //   title: 'Multi-Vendor Marketplace Platform',
+  //   category: 'Product Development',
+  //   problem: 'Local artisan community had no centralized place to sell online. Existing solutions were too expensive or complex.',
+  //   solution: 'Custom marketplace with vendor onboarding, product listings, payment processing, and automated order management.',
+  //   impact: [
+  //     'Launched with 40 vendors in first month',
+  //     'Processed $50k in transactions in 90 days',
+  //     'Reduced vendor setup time from days to 15 minutes',
+  //   ],
+  //   tech: ['Next.js', 'Stripe Connect', 'PostgreSQL', 'Vercel'],
+  // },
   {
     id: 'reporting-automation',
     title: 'Client Reporting Automation',
