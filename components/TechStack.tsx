@@ -85,7 +85,7 @@ export default function TechStack() {
                 key={index}
                 className={`glass-card p-8 flex flex-col items-center justify-center min-h-[160px] group hover:scale-105 transition-all duration-300 animate-scale-in ${delays[index]}`}
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-purple-500 rounded-lg flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-primary/50 transition-shadow p-3">
+                <div className="w-24 h-24 flex items-center justify-center mb-4 transition-all p-3">
                   <Image
                     src={tech.logo}
                     alt={tech.name}
@@ -114,7 +114,7 @@ export default function TechStack() {
                 key={index}
                 className={`glass-card p-8 flex flex-col items-center justify-center min-h-[160px] group hover:scale-105 transition-all duration-300 animate-scale-in ${delays[index]}`}
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-shadow p-3">
+                <div className="w-24 h-24 flex items-center justify-center mb-4 transition-all p-3">
                   <Image
                     src={tech.logo}
                     alt={tech.name}
@@ -143,7 +143,7 @@ export default function TechStack() {
                 key={index}
                 className={`glass-card p-8 flex flex-col items-center justify-center min-h-[160px] group hover:scale-105 transition-all duration-300 animate-scale-in ${delays[index]}`}
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-blue-500/50 transition-shadow p-3">
+                <div className="w-24 h-24 flex items-center justify-center mb-4 transition-all p-3">
                   <Image
                     src={tech.logo}
                     alt={tech.name}
@@ -172,7 +172,7 @@ export default function TechStack() {
                 key={index}
                 className={`glass-card p-8 flex flex-col items-center justify-center min-h-[160px] group hover:scale-105 transition-all duration-300 animate-scale-in ${delays[index]}`}
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-lg flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-green-500/50 transition-shadow p-3">
+                <div className="w-24 h-24 flex items-center justify-center mb-4 transition-all p-3">
                   <Image
                     src={tech.logo}
                     alt={tech.name}
