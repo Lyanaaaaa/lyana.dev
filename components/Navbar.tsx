@@ -1,13 +1,24 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
+import { useState, useEffect, useCallback } from 'react'
+
 import { Menu, X } from 'lucide-react'
 import Image from 'next/image'
 
+const MENU_CLOSE_DURATION = 450
+
+type MenuState = 'closed' | 'open' | 'closing'
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [menuState, setMenuState] = useState<MenuState>('closed')
+
+  const openMenu = useCallback(() => setMenuState('open'), [])
+
+  const closeMenu = useCallback(() => {
+    setMenuState('closing')
+    setTimeout(() => setMenuState('closed'), MENU_CLOSE_DURATION)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,15 +31,9 @@ export default function Navbar() {
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [isMobileMenuOpen])
+    document.body.style.overflow = menuState !== 'closed' ? 'hidden' : 'unset'
+    return () => { document.body.style.overflow = 'unset' }
+  }, [menuState])
 
   const navLinks = [
     { name: 'Overview', href: '#overview' },
@@ -48,10 +53,14 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 py-4 animate-on-load">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group animate-fade-in-left delay-100">
+          <a
+            href="#"
+            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+            className="flex items-center gap-3 group animate-fade-in-left delay-100 cursor-pointer"
+          >
             <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20 group-hover:ring-primary/40 group-hover:scale-110 transition-all">
               <Image
-                src="resources/avatar.png"
+                src="/resources/avatar.jpg"
                 alt="Lyana A"
                 width={40}
                 height={40}
@@ -60,7 +69,7 @@ export default function Navbar() {
               />
             </div>
             <span className="text-white font-bold md:text-sm text-lg hidden sm:block">Lyana A</span>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -86,34 +95,39 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-110"
+            onClick={() => menuState === 'open' ? closeMenu() : openMenu()}
+            className="md:hidden text-white p-2 hover:bg-white/10 card-button transition-all duration-300 hover:scale-110"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? (
+            {menuState !== 'closed' ? (
               <X className="w-6 h-6 text-primary" />
             ) : (
               <Menu className="w-6 h-6" />
             )}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Menu - Full Screen Overlay */}
+      {/* Mobile Menu - Full Screen Overlay */}
+      {menuState !== 'closed' && (
         <div
-          className={`md:hidden fixed inset-0 z-40 transition-all duration-500 ${
-            isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          }`}
+          className="md:hidden fixed inset-0 z-[60]"
           style={{
             background: 'linear-gradient(135deg, black 0%, #0f1724 50%, black 100%)',
+            animation: menuState === 'closing'
+              ? 'fade-out-down 0.45s ease-in forwards'
+              : 'fade-in 0.3s ease-out both',
           }}
         >
           {/* Close Button */}
           <button
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="absolute top-6 right-6 text-white p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-110 z-50"
+            onClick={closeMenu}
+            className="absolute top-6 right-6 text-white p-2 hover:bg-white/10 card-button transition-all duration-300 hover:scale-110 z-[70]"
             aria-label="Close menu"
             style={{
-              animation: isMobileMenuOpen ? 'scale-in 0.3s ease-out 0.2s both' : 'none',
+              animation: menuState === 'closing'
+                ? 'scale-out 0.25s ease-in forwards'
+                : 'scale-in 0.3s ease-out 0.2s both',
             }}
           >
             <X className="w-6 h-6 text-primary" />
@@ -125,12 +139,12 @@ export default function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-gray-300 hover:text-primary hover:bg-white/5 transition-all duration-300 font-medium px-6 py-4 rounded-lg group w-full text-center text-lg"
+                  onClick={closeMenu}
+                  className="text-gray-300 hover:text-primary hover:bg-white/5 transition-all duration-300 font-medium px-6 py-4 card-button group w-full text-center text-lg"
                   style={{
-                    animation: isMobileMenuOpen
-                      ? `fade-in-up 0.4s ease-out ${index * 0.1 + 0.3}s both`
-                      : 'none',
+                    animation: menuState === 'closing'
+                      ? `fade-out-down 0.3s ease-in ${(navLinks.length - 1 - index) * 0.06}s forwards`
+                      : `fade-in-up 0.4s ease-out ${index * 0.1 + 0.3}s both`,
                   }}
                 >
                   <span className="flex items-center justify-center gap-2">
@@ -141,12 +155,12 @@ export default function Navbar() {
               ))}
               <a
                 href="#contact"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={closeMenu}
                 className="btn-primary px-8 py-4 text-base text-center mt-4 w-full"
                 style={{
-                  animation: isMobileMenuOpen
-                    ? `fade-in-up 0.4s ease-out ${navLinks.length * 0.1 + 0.3}s both`
-                    : 'none',
+                  animation: menuState === 'closing'
+                    ? 'fade-out-down 0.3s ease-in forwards'
+                    : `fade-in-up 0.4s ease-out ${navLinks.length * 0.1 + 0.3}s both`,
                 }}
               >
                 Contact
@@ -156,14 +170,14 @@ export default function Navbar() {
               <div
                 className="mt-8"
                 style={{
-                  animation: isMobileMenuOpen
-                    ? `fade-in-up 0.4s ease-out ${navLinks.length * 0.1 + 0.4}s both`
-                    : 'none',
+                  animation: menuState === 'closing'
+                    ? 'scale-out 0.3s ease-in forwards'
+                    : `fade-in-up 0.4s ease-out ${navLinks.length * 0.1 + 0.4}s both`,
                 }}
               >
                 <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-primary/30 hover:ring-primary/50 transition-all hover:scale-110">
                   <Image
-                    src="resources/avatar.png"
+                    src="/resources/avatar.jpg"
                     alt="Lyana A"
                     width={80}
                     height={80}
@@ -174,7 +188,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   )
 }

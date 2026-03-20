@@ -43,12 +43,7 @@ export default function Skills() {
                   {skillGroup.items.map((skill, skillIndex) => (
                     <span
                       key={skillIndex}
-                      className="px-3 py-1.5 rounded-lg text-sm font-mono transition-all duration-200 hover:scale-105"
-                      style={{
-                        background: 'rgba(6, 182, 212, 0.1)',
-                        border: '1px solid rgba(6, 182, 212, 0.2)',
-                        color: '#67e8f9',
-                      }}
+                      className="card-tag"
                     >
                       {skill}
                     </span>

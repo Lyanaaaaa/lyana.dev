@@ -7,12 +7,6 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 interface TechItem {
   name: string
   logo: string
-  iconColor?: string
-}
-
-interface TechCategory {
-  title: string
-  items: TechItem[]
 }
 
 interface TechSection {
@@ -27,27 +21,27 @@ type FilterType = 'all' | 'frontend' | 'backend' | 'database'
 
 const techStackData = {
   frameworks: [
-    { name: 'Laravel', logo: 'https://cdn.simpleicons.org/laravel/white', iconColor: '#ffffff' },
-    { name: 'Next.js', logo: 'https://cdn.simpleicons.org/nextdotjs/white', iconColor: '#ffffff' },
-    { name: 'Node.js', logo: 'https://cdn.simpleicons.org/nodedotjs/white', iconColor: '#ffffff' },
-    { name: 'React', logo: 'https://cdn.simpleicons.org/react/white', iconColor: '#ffffff' },
+    { name: 'Laravel', logo: 'https://cdn.simpleicons.org/laravel/white' },
+    { name: 'Next.js', logo: 'https://cdn.simpleicons.org/nextdotjs/white' },
+    { name: 'Node.js', logo: 'https://cdn.simpleicons.org/nodedotjs/white' },
+    { name: 'React', logo: 'https://cdn.simpleicons.org/react/white' },
   ],
   languages: [
-    { name: 'PHP', logo: 'https://cdn.simpleicons.org/php/white', iconColor: '#ffffff' },
-    { name: 'TypeScript', logo: 'https://cdn.simpleicons.org/typescript/white', iconColor: '#ffffff' },
-    { name: 'JavaScript', logo: 'https://cdn.simpleicons.org/javascript/white', iconColor: '#ffffff' },
-    { name: 'HTML/CSS', logo: 'https://cdn.simpleicons.org/html5/white', iconColor: '#ffffff' },
+    { name: 'PHP', logo: 'https://cdn.simpleicons.org/php/white' },
+    { name: 'TypeScript', logo: 'https://cdn.simpleicons.org/typescript/white' },
+    { name: 'JavaScript', logo: 'https://cdn.simpleicons.org/javascript/white' },
+    { name: 'HTML/CSS', logo: 'https://cdn.simpleicons.org/html5/white' },
   ],
   databases: [
-    { name: 'PostgreSQL', logo: 'https://cdn.simpleicons.org/postgresql/white', iconColor: '#ffffff' },
-    { name: 'MySQL', logo: 'https://cdn.simpleicons.org/mysql/white', iconColor: '#ffffff' },
-    { name: 'Prisma ORM', logo: 'https://cdn.simpleicons.org/prisma/white', iconColor: '#ffffff' },
+    { name: 'PostgreSQL', logo: 'https://cdn.simpleicons.org/postgresql/white' },
+    { name: 'MySQL', logo: 'https://cdn.simpleicons.org/mysql/white' },
+    { name: 'Prisma ORM', logo: 'https://cdn.simpleicons.org/prisma/white' },
   ],
   tools: [
-    { name: 'tRPC', logo: 'https://cdn.simpleicons.org/trpc/white', iconColor: '#ffffff' },
-    { name: 'Tailwind CSS', logo: 'https://cdn.simpleicons.org/tailwindcss/white', iconColor: '#ffffff' },
-    { name: 'Bootstrap', logo: 'https://cdn.simpleicons.org/bootstrap/white', iconColor: '#ffffff' },
-    { name: 'Billplz', logo: 'https://cdn.simpleicons.org/stripe/white', iconColor: '#ffffff' },
+    { name: 'tRPC', logo: 'https://cdn.simpleicons.org/trpc/white' },
+    { name: 'Tailwind CSS', logo: 'https://cdn.simpleicons.org/tailwindcss/white' },
+    { name: 'Bootstrap', logo: 'https://cdn.simpleicons.org/bootstrap/white' },
+    { name: 'Billplz', logo: 'https://cdn.simpleicons.org/stripe/white' },
   ],
 }
 
@@ -85,7 +79,7 @@ const techSections: TechSection[] = [
 const TechCard = memo(({ tech, delay }: { tech: TechItem; delay: string }) => {
   return (
     <div
-      className={`glass-card p-8 flex flex-col items-center justify-center min-h-[160px] group hover:scale-105 transition-all duration-300 animate-scale-in ${delay}`}
+      className={`glass-card !py-6 md:!py-8 flex flex-col items-center justify-center min-h-[140px] md:min-h-[160px] group hover:scale-105 transition-all duration-300 animate-scale-in ${delay}`}
     >
       <div className="w-20 h-20 flex items-center justify-center mb-4 transition-all p-3">
         <Image
@@ -134,10 +128,7 @@ export default function TechStack() {
     [activeFilter]
   )
 
-  const handleFilterAll = useCallback(() => setActiveFilter('all'), [])
-  const handleFilterFrontend = useCallback(() => setActiveFilter('frontend'), [])
-  const handleFilterBackend = useCallback(() => setActiveFilter('backend'), [])
-  const handleFilterDatabase = useCallback(() => setActiveFilter('database'), [])
+  const handleFilter = useCallback((filter: FilterType) => () => setActiveFilter(filter), [])
 
   return (
     <section className="py-20 px-6" ref={ref}>
@@ -150,47 +141,20 @@ export default function TechStack() {
         </div>
 
         {/* Filter tabs */}
-        <div className="flex gap-4 mb-12 flex-wrap animate-fade-in-up delay-200">
-          <button
-            onClick={handleFilterAll}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
-              activeFilter === 'all'
-                ? 'text-white'
-                : 'text-gray-300 hover:bg-dark-700'
-            }`}
-          >
-            All
-          </button>
-          <button
-            onClick={handleFilterFrontend}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
-              activeFilter === 'frontend'
-                ? 'btn-primary text-white'
-                : 'text-gray-300 hover:bg-dark-700'
-            }`}
-          >
-            Frontend
-          </button>
-          <button
-            onClick={handleFilterBackend}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
-              activeFilter === 'backend'
-                ? 'btn-primary text-white'
-                : 'text-gray-300 hover:bg-dark-700'
-            }`}
-          >
-            Backend
-          </button>
-          <button
-            onClick={handleFilterDatabase}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
-              activeFilter === 'database'
-                ? 'btn-primary text-white'
-                : 'text-gray-300 hover:bg-dark-700'
-            }`}
-          >
-            Database
-          </button>
+        <div className="filter-tabs mb-12 animate-fade-in-up delay-200">
+          {(['all', 'frontend', 'backend', 'database'] as const).map((filter) => (
+            <button
+              key={filter}
+              onClick={handleFilter(filter)}
+              className={`filter-tab ${
+                activeFilter === filter
+                  ? filter === 'all' ? 'text-white' : 'btn-primary text-white'
+                  : 'text-gray-300 hover:bg-dark-700'
+              }`}
+            >
+              {filter.charAt(0).toUpperCase() + filter.slice(1)}
+            </button>
+          ))}
         </div>
 
         {/* Tech Sections */}

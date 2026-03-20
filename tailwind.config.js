@@ -46,6 +46,14 @@ module.exports = {
           'content': '720px',
           'container': '1200px',
         },
+        borderRadius: {
+          'card': '3rem',
+          'card-sm': '2rem',
+          'card-inner': '2rem',
+          'card-inner-sm': '2rem',
+          'card-tag': '1.5rem',
+          'card-tag-sm': '2rem',
+        },
         backgroundImage: {
           'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
           'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',

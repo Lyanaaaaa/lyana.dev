@@ -1,48 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import { Phone, Mail, Clock, Instagram } from 'lucide-react'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 export default function Contact() {
   const ref = useScrollAnimation()
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('submitting')
-
-    // Replace this with your actual form submission logic
-    // Example: Formspree, Resend, or your own API endpoint
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      // For production, use something like:
-      // const response = await fetch('YOUR_FORM_ENDPOINT', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formState),
-      // })
-      
-      setStatus('success')
-      setFormState({ name: '', email: '', message: '' })
-    } catch (error) {
-      setStatus('error')
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormState(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
-  }
 
   return (
     <section id="contact" className="section relative" ref={ref}>
@@ -50,10 +12,10 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in-down">
-              Let&apos;s Work Together
+              Let&apos;s Work Together!
             </h2>
             <p className="text-md text-gray-300 animate-fade-in-up delay-100">
-              Whether you need a full product built, a specific feature shipped, or technical collabolation, I'm available for project work and contract roles.
+              Whether you need a full product built, a specific feature shipped, or technical collaboration, I'm available for project work and contract roles.
             </p>
           </div>
 
@@ -115,7 +77,7 @@ export default function Contact() {
             </button>
 
             {status === 'success' && (
-              <div className="p-4 rounded-lg text-center animate-fade-in" style={{
+              <div className="p-4 rounded-card-tag text-center animate-fade-in" style={{
                 background: 'rgba(6, 182, 212, 0.1)',
                 border: '1px solid rgba(6, 182, 212, 0.3)',
                 color: '#67e8f9',
@@ -125,7 +87,7 @@ export default function Contact() {
             )}
 
             {status === 'error' && (
-              <div className="p-4 rounded-lg text-center animate-fade-in" style={{
+              <div className="p-4 rounded-card-tag text-center animate-fade-in" style={{
                 background: 'rgba(239, 68, 68, 0.1)',
                 border: '1px solid rgba(239, 68, 68, 0.3)',
                 color: '#fca5a5',
@@ -165,8 +127,8 @@ export default function Contact() {
                 delay: 'delay-400'
               }
             ].map((item, index) => (
-              <div key={index} className={`glass-card flex items-start gap-3 animate-scale-in ${item.delay}`}>
-                <item.icon className="w-6 h-6 flex-shrink-0 mt-1" />
+              <div key={index} className={`glass-card !py-6 md:!py-8 flex items-start gap-4 animate-scale-in ${item.delay}`}>
+                <item.icon className="w-6 h-6 flex-shrink-0 mt-0.5" />
                 <div>
                   <h3 className="font-semibold text-white mb-1">{item.title}</h3>
                   {item.href ? (

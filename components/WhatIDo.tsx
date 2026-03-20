@@ -2,9 +2,11 @@
 
 import { Code2, Layers, TrendingUp, Briefcase } from 'lucide-react'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { useStaggerAnimation } from '@/hooks/useStaggerAnimation'
 
 export default function WhatIDo() {
   const ref = useScrollAnimation()
+  const gridRef = useStaggerAnimation(150)
   const services = [
     {
       icon: Code2,
@@ -49,17 +51,17 @@ export default function WhatIDo() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div ref={gridRef} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => {
               const Icon = service.icon
-              const delays = ['delay-100', 'delay-200', 'delay-300', 'delay-400']
               return (
                 <div
                   key={index}
-                  className={`glass-card text-center group p-8 hover:scale-105 transition-all duration-300 animate-scale-in ${delays[index]}`}
+                  data-stagger={index}
+                  className="glass-card text-center group hover:scale-105 transition-all duration-300 animate-stagger-in"
                 >
                   <div
-                    className="inline-flex items-center justify-center w-16 h-16 rounded-xl mb-6 transition-all duration-300 bg-gradient-to-br from-primary/20 to-purple-500/20"
+                    className="inline-flex items-center justify-center w-16 h-16 card-icon mb-6 transition-all duration-300 bg-gradient-to-br from-primary/20 to-purple-500/20"
                   >
                     <Icon
                       className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300"
