@@ -58,12 +58,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {project.tech.map((tech, index) => (
               <span
                 key={index}
-                className="px-3 py-1 text-sm rounded-md font-mono"
-                style={{
-                  background: 'rgba(6, 182, 212, 0.1)',
-                  border: '1px solid rgba(6, 182, 212, 0.2)',
-                  color: '#67e8f9',
-                }}
+                className="card-tag"
               >
                 {tech}
               </span>

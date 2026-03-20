@@ -26,25 +26,18 @@ function ExperienceItem({ item, index }: { item: typeof experienceData[0]; index
           index % 2 === 0 ? 'md:ml-auto md:pl-12' : 'md:pr-12'
         } ${animations}`}
       >
-        <div className="glass-card p-6">
-          <div className="flex items-start justify-between mb-4">
+        <div className="glass-card text-center md:text-left">
+          <div className="flex flex-col items-center md:flex-row md:items-start md:justify-between mb-4">
             <div className="flex-1">
               <h3 className="text-xl font-bold mb-1">{item.title}</h3>
               <p className="text-primary font-medium">{item.organization}</p>
               {item.location && <p className="text-sm text-gray-400">{item.location}</p>}
             </div>
-            <div className="md:hidden">
-              {item.type === 'education' ? (
-                <GraduationCap className="w-6 h-6 text-primary" />
-              ) : (
-                <Briefcase className="w-6 h-6 text-primary" />
-              )}
-            </div>
           </div>
 
           <p className="text-sm text-gray-400 mb-4">{item.period}</p>
 
-          <ul className="space-y-2 mb-4">
+          <ul className="space-y-2 mb-4 text-left">
             {item.description.map((desc, i) => (
               <li key={i} className="text-sm text-gray-300 leading-relaxed">
                 • {desc}
@@ -53,7 +46,7 @@ function ExperienceItem({ item, index }: { item: typeof experienceData[0]; index
           </ul>
 
           {item.tags && (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center md:justify-start">
               {item.tags.map((tag, i) => (
                 <span key={i} className="badge-glass text-xs">
                   {tag}
@@ -72,7 +65,7 @@ export default function Experience() {
   return (
     <section className="py-20 px-6">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-16" ref={headerRef}>
+        <div className="mb-16 text-center md:text-left" ref={headerRef}>
           <p className="text-sm uppercase tracking-wider text-gray-400 mb-2 animate-fade-in-down">
             WHAT I HAVE DONE SO FAR
           </p>

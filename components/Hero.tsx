@@ -1,17 +1,17 @@
 'use client'
 
-import { ArrowRight, ChevronDown, Atom } from 'lucide-react'
+import { ArrowRight, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import PolyhedraBackground from './PolyhedraBackground'
+
+const phrases = ['Lyana Aqilah', 'a Software Engineer', 'Full-Stack Developer'] as const
 
 export default function Hero() {
   const [text, setText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const [loopNum, setLoopNum] = useState(0)
   const [typingSpeed, setTypingSpeed] = useState(150)
-
-  const phrases = ['Lyana Aqilah', 'a Software Engineer', 'Full-Stack Developer']
 
   useEffect(() => {
     const handleType = () => {
@@ -36,7 +36,7 @@ export default function Hero() {
 
     const timer = setTimeout(handleType, typingSpeed)
     return () => clearTimeout(timer)
-  }, [text, isDeleting, loopNum, typingSpeed, phrases])
+  }, [text, isDeleting, loopNum, typingSpeed])
 
   return (
     <section className="min-h-screen mt-8 flex items-center justify-center relative overflow-hidden">
@@ -52,8 +52,8 @@ export default function Hero() {
       {/* 3D Polyhedra Animation Background */}
       <PolyhedraBackground />
 
-      <div className="container mx-auto px-6 text-left relative z-10 animate-on-load">
-        <div className="max-w-4xl">
+      <div className="container mx-auto px-6 text-center md:text-left relative z-10 animate-on-load">
+        <div className="max-w-4xl mx-auto md:mx-0">
           {/* Badge */}
           {/* <div className="badge-glass inline-flex mb-8 animate-fade-in-down delay-200">
             <Atom className="w-4 h-4" />
@@ -61,7 +61,7 @@ export default function Hero() {
           </div> */}
 
           {/* Main Heading with Typing Effect */}
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-4 leading-normal animate-fade-in-up delay-300">
+          <h1 className="min-h-[11rem] md:min-h-0 text-4xl md:text-5xl lg:text-7xl font-bold mb-4 leading-normal animate-fade-in-up delay-300">
             Ola! I'm{' '}
             <br className="hidden sm:block" />
             <span className="gradient-text">{text}</span>
@@ -69,14 +69,14 @@ export default function Hero() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-md md:text-lg text-gray-300 mb-28 max-w-2xl leading-relaxed animate-fade-in-up delay-400">
+          <p className="text-md md:text-lg text-gray-300 mb-28 max-w-2xl mx-auto md:mx-0 leading-relaxed animate-fade-in-up delay-400">
           Software developer crafting decent digital experiences with
             <span className="text-primary font-semibold"> clean code</span> and
             <span className="text-primary font-semibold"> innovative solutions</span>.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-start gap-4 animate-fade-in-up delay-500">
+          <div className="flex flex-col sm:flex-row items-center md:items-start gap-4 animate-fade-in-up delay-500">
             <Link
               href="#projects"
               className="btn-primary group"
@@ -94,7 +94,7 @@ export default function Hero() {
           </div>
 
           {/* Trust Badge */}
-          <div className="mt-8 flex items-center gap-3 animate-fade-in delay-700">
+          <div className="mt-8 flex items-center justify-center md:justify-start gap-3 animate-fade-in delay-700">
             {/* <div className="flex -space-x-2">
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-cyan-600 border-2 border-dark-900"></div>
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-dark-900"></div>

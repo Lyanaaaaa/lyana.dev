@@ -49,7 +49,7 @@ export default function Overview() {
           {overviewData.map((card, index) => (
             <div
               key={index}
-              className={`glass-card p-8 text-center flex flex-col items-center justify-center min-h-[200px] transition-all duration-300 ${
+              className={`glass-card !py-8 text-center flex flex-col items-center justify-center min-h-[160px] md:min-h-[200px] transition-all duration-300 ${
                 card.isLink ? 'cursor-pointer hover:scale-105' : ''
               }`}
             >
