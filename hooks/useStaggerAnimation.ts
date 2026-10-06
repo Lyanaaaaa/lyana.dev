@@ -8,15 +8,17 @@ import { useEffect, useRef, useCallback } from 'react'
  * On desktop (multi-column), cards in the same row animate together with a slight offset.
  *
  * @param baseDelay - milliseconds between each card's animation (default: 120ms)
+ * @param resetKey - when it changes, re-scan for newly rendered children (e.g. after a filter
+ *   change remounts the grid); without it, cards rendered later stay at opacity 0
  */
-export function useStaggerAnimation(baseDelay = 120) {
+export function useStaggerAnimation(baseDelay = 120, resetKey?: unknown) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   const observe = useCallback(() => {
     const container = containerRef.current
     if (!container) return
 
-    const children = container.querySelectorAll<HTMLElement>('[data-stagger]')
+    const children = container.querySelectorAll<HTMLElement>('[data-stagger]:not(.animate-visible)')
     if (!children.length) return
 
     const observer = new IntersectionObserver(
@@ -39,14 +41,12 @@ export function useStaggerAnimation(baseDelay = 120) {
 
     children.forEach((child) => observer.observe(child))
 
-    return () => {
-      children.forEach((child) => observer.unobserve(child))
-    }
+    return () => observer.disconnect()
   }, [baseDelay])
 
   useEffect(() => {
     return observe()
-  }, [observe])
+  }, [observe, resetKey])
 
   return containerRef
 }

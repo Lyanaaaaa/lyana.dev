@@ -11,6 +11,21 @@ export interface ExperienceItem {
 export const experienceData: ExperienceItem[] = [
   {
     type: 'work',
+    title: 'Software Engineer',
+    organization: 'Tech Strongbox',
+    period: '2025 - Present',
+    location: 'Remote',
+    description: [
+      'Built Dourr, a rental marketplace for Malaysia, from scratch, with a few features handled by other developers',
+      'Built Autorentic, a rental automation platform for property agencies',
+      'Ship full-stack features across Next.js, React and Laravel, from search and inquiries to e-tenancy agreements and e-signature',
+      'Own payments and compliance flows: gateway collection, deposits, invoicing and LHDN MyInvois e-invoicing',
+      'Cover releases with PHPUnit and Playwright suites, deployed through GitHub Actions',
+    ],
+    tags: ['Next.js', 'React', 'Laravel', 'MySQL', 'Playwright'],
+  },
+  {
+    type: 'work',
     title: 'Full-Stack Developer',
     organization: 'Membership Management System (Freelance)',
     period: 'Mar 2025 - Present',
@@ -18,10 +33,10 @@ export const experienceData: ExperienceItem[] = [
     description: [
       'Built scalable membership platform handling onboarding, renewals, and lifecycle management',
       'Designed type-safe backend APIs with tRPC and database layer with Prisma ORM',
-      'Implemented payment processing with Billplz integration',
+      'Integrated a payment gateway for membership payments (sandbox-tested)',
       'Deployed production system optimized for high traffic and reliability',
     ],
-    tags: ['Next.js', 'TypeScript', 'tRPC', 'PostgreSQL', 'Billplz'],
+    tags: ['Next.js', 'TypeScript', 'tRPC', 'PostgreSQL'],
   },
   {
     type: 'work',
