@@ -63,4 +63,24 @@ export const portfolioProjects: PortfolioProject[] = [
     tags: ['TypeScript', 'React', 'Prototype'],
     githubUrl: 'https://github.com/Lyanaaaaa/NgamStay',
   },
+  {
+    id: 'backend-api-systems',
+    title: 'Backend API Systems',
+    description:
+      'RESTful APIs with authentication, role-based permissions, and data workflows. Optimized queries and clean code.',
+    category: 'website',
+    tech: ['Laravel', 'PHP', 'MySQL', 'Node.js'],
+    image: 'https://images.unsplash.com/photo-1760670399462-f5e479452c27?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    tags: ['Laravel', 'API', 'Backend'],
+  },
+  {
+    id: 'modern-web-apps',
+    title: 'Modern Web Apps',
+    description:
+      'Production-grade applications with Next.js and Node.js. Server-side rendering, database optimization, comprehensive docs.',
+    category: 'website',
+    tech: ['Next.js', 'Node.js', 'TypeScript', 'PostgreSQL'],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015',
+    tags: ['Next.js', 'TypeScript', 'PostgreSQL'],
+  },
 ]
