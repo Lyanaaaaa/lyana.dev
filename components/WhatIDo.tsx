@@ -30,7 +30,7 @@ export default function WhatIDo() {
       icon: Layers,
       title: 'Modern Stack',
       description:
-        'Next.js, TypeScript, Laravel, PostgreSQL, tRPC, Billplz. Always learning, always shipping.',
+        'Next.js, TypeScript, Laravel, PostgreSQL, tRPC, Docker. Always learning, always shipping.',
     },
   ]
 

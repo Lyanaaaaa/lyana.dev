@@ -87,7 +87,7 @@ ProjectCard.displayName = 'ProjectCard'
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all')
   const ref = useScrollAnimation()
-  const gridRef = useStaggerAnimation(150)
+  const gridRef = useStaggerAnimation(150, activeFilter)
 
   const filteredProjects = useMemo(
     () =>

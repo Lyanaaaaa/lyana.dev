@@ -41,7 +41,7 @@ const techStackData = {
     { name: 'tRPC', logo: 'https://cdn.simpleicons.org/trpc/white' },
     { name: 'Tailwind CSS', logo: 'https://cdn.simpleicons.org/tailwindcss/white' },
     { name: 'Bootstrap', logo: 'https://cdn.simpleicons.org/bootstrap/white' },
-    { name: 'Billplz', logo: 'https://cdn.simpleicons.org/stripe/white' },
+    { name: 'Docker', logo: 'https://cdn.simpleicons.org/docker/white' },
   ],
 }
 
