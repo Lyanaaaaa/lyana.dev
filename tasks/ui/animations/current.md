@@ -1,5 +1,7 @@
 # Portfolio Enhancement: Entrance Animations & Hero Refactor
 
+> ⚠️ Partly stale (2026-11-16): Hero/WhatIDo/PolyhedraBackground described here were replaced in the 2026-11 revamp. Current visual system and animation rules live in `CLAUDE.md`; content decisions in `tasks/content/portfolio-credibility/current.md`.
+
 ## Overview
 Implemented professional entrance animation system and refactored Hero/WhatIDo components for modern portfolio showcase.
 
