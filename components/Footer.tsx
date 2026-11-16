@@ -1,138 +1,119 @@
 'use client'
 
-import { Github, Linkedin, Mail, Instagram } from 'lucide-react'
+import Image from 'next/image'
+import { Activity, ArrowRight, ArrowUp, ArrowUpRight, Heart, Mail, Sparkle } from 'lucide-react'
+import SpaceBackdrop from './space/SpaceBackdrop'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { navLinks, profile } from '@/data/profile'
+
+const otherPlaces = [
+  { name: 'GitHub', href: profile.socials.github },
+  { name: 'LinkedIn', href: profile.socials.linkedin },
+  { name: 'Instagram', href: profile.socials.instagram },
+]
+
+const LINK_CLASS =
+  'group flex items-center justify-center gap-3 text-[15px] text-gray-300 transition-colors hover:text-white sm:justify-between'
+
+function LinkArrow() {
+  return <ArrowUpRight className="h-3.5 w-3.5 text-primary-300 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+}
 
 export default function Footer() {
   const ref = useScrollAnimation()
-  const socialLinks = [
-    {
-      name: 'GitHub',
-      href: 'https://github.com/Lyanaaaaa',
-      icon: Github,
-    },
-    {
-      name: 'LinkedIn',
-      href: 'https://linkedin.com/in/lyanaaqilah',
-      icon: Linkedin,
-    },
-    {
-      name: 'Instagram',
-      href: 'https://instagram.com/lyana_qillah',
-      icon: Instagram,
-    },
-    {
-      name: 'Email',
-      href: 'mailto:nurlyanaaqilah@gmail.com',
-      icon: Mail,
-    },
-  ]
-
-  const footerLinks = [
-    {
-      title: 'Links',
-      links: [
-        { name: 'Overview', href: '#overview' },
-        { name: 'Experience', href: '#experience' },
-        { name: 'Projects', href: '#projects' },
-        { name: 'Tech Stack', href: '#tech-stack' },
-      ],
-    },
-    {
-      title: 'Projects',
-      links: [
-        { name: 'Atlas', href: '#projects' },
-        { name: 'AquaStruct Engineer Pro', href: '#projects' },
-        { name: 'Autorentic', href: '#projects' },
-        { name: 'Mr Count', href: '#projects' },
-      ],
-    },
-    {
-      title: 'Give man a fish & feed him for a day. Teach man to fish & feed him for a lifetime. Teach a man to cycle & he will realize fishing is stupid and boring.',
-      links: [
-        // { name: 'GitHub', href: 'https://github.com/Lyanaaaaa' },
-        // { name: 'LinkedIn', href: 'https://linkedin.com/in/lyanaaqilah' },
-        // { name: 'Email', href: 'mailto:nurlyanaaqilah@gmail.com' },
-      ],
-    },
-  ]
+  const toTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+  const goTop = (e: React.MouseEvent) => {
+    e.preventDefault()
+    toTop()
+  }
 
   return (
-    <footer className="relative border-t border-white/10" ref={ref}>
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
-          <div className="animate-fade-in-up text-center md:text-left">
-            <div className="flex flex-col md:flex-row items-center gap-3 mb-4">
-              {/* <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">LA</span>
-              </div> */}
-              <div>
-                <h3 className="text-white font-bold">Let's Build Together</h3>
-                {/* <p className="text-xs text-gray-400">nurlyanaaqilah@gmail.com</p> */}
-                <h3 className="text-xs text-gray-400 mt-5">+60 19 409 0597</h3>
-              </div>
-            </div>
-          </div>
+    <footer ref={ref} className="relative overflow-hidden pb-6 pt-28">
+      <SpaceBackdrop variant="footer" />
 
-          {/* Footer Links */}
-          {footerLinks.map((section, index) => {
-            const delays = ['delay-100', 'delay-200', 'delay-300']
-            return (
-              <div key={section.title} className={`animate-fade-in-up ${delays[index]} text-center md:text-left`}>
-                <h4 className="text-white font-semibold mb-4">{section.title}</h4>
-                <ul className="space-y-2 flex flex-col items-center md:items-start">
-                  {section.links.map((link) => (
-                    <li key={link.name}>
-                      <a
-                        href={link.href}
-                        className="text-gray-400 hover:text-primary transition-colors text-sm"
-                      >
-                        {link.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )
-          })}
+      <div className="container relative z-10">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-block rounded-full border border-white/20 bg-ink/60 px-5 py-2 font-mono text-[11px] uppercase tracking-[0.35em] text-gray-300 animate-fade-in-down">
+            {'// End of the journey'}
+          </span>
+          <h2 className="mt-7 font-extrabold animate-fade-in-up delay-100" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', letterSpacing: '-0.035em' }}>
+            Thanks for <span className="text-gradient">Visiting!</span>
+          </h2>
+          <p className="lead mt-4 animate-fade-in-up delay-200">
+            Let&apos;s build something useful together. Stay curious, keep shipping, and I&apos;ll see you around the internet!
+          </p>
         </div>
 
-        {/* Bottom section */}
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10 gap-4">
-          <div className="flex items-center gap-6 animate-fade-in delay-400">
-            {socialLinks.map((link) => {
-              const Icon = link.icon
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-primary transition-all duration-300 hover:scale-110"
-                  aria-label={link.name}
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              )
-            })}
+        <div className="relative mx-auto my-14 flex max-w-xl items-center gap-4">
+          <span className="h-px flex-1 bg-gradient-to-r from-transparent to-white/20" />
+          <Sparkle className="h-4 w-4 fill-primary-300 text-primary-300" />
+          <span className="h-px flex-1 bg-gradient-to-l from-transparent to-white/20" />
+        </div>
+
+        <div className="grid gap-10 text-center sm:grid-cols-2 sm:text-left lg:grid-cols-[1.3fr_1fr_1fr_1.2fr] lg:gap-0">
+          <div className="lg:pr-10">
+            <div className="flex items-center justify-center gap-3 sm:justify-start">
+              <span className="h-11 w-11 overflow-hidden rounded-full ring-2 ring-primary-400/50">
+                <Image src={profile.avatar} alt="" width={44} height={44} className="h-full w-full object-cover" />
+              </span>
+              <span className="font-display text-2xl font-bold text-white">{profile.firstName}</span>
+            </div>
+            <p className="mt-4 text-[15px] leading-relaxed text-gray-400">Building software that runs real businesses, with clean code and calm releases.</p>
           </div>
 
-          {/* Scroll to top button */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-10 h-10 rounded-full bg-dark-800/20 hover:bg-primary transition-all duration-300 flex items-center justify-center group animate-scale-in delay-500"
-            aria-label="Scroll to top"
-          >
-            <svg
-              className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
-          </button>
+          <div className="lg:border-l lg:border-white/10 lg:px-10">
+            <h3 className="text-lg font-semibold">Quick Links</h3>
+            <ul className="mt-5 space-y-3">
+              {navLinks.map((l) => (
+                <li key={l.id}>
+                  <a href={l.href} onClick={l.id === 'top' ? goTop : undefined} className={LINK_CLASS}>
+                    {l.name}
+                    <LinkArrow />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:border-l lg:border-white/10 lg:px-10">
+            <h3 className="text-lg font-semibold">Other Places</h3>
+            <ul className="mt-5 space-y-3">
+              {otherPlaces.map((l) => (
+                <li key={l.name}>
+                  <a href={l.href} target="_blank" rel="noopener noreferrer" className={LINK_CLASS}>
+                    {l.name}
+                    <LinkArrow />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:border-l lg:border-white/10 lg:pl-10">
+            <h3 className="text-lg font-semibold">Let&apos;s Connect</h3>
+            <p className="mt-4 text-[15px] leading-relaxed text-gray-400">Open to project work, contract roles and interesting problems.</p>
+            <a href="#contact" className="btn-blue mt-6 !py-3">
+              <Mail className="h-4 w-4" /> Send a Message <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 rounded-card-inner border border-white/10 bg-ink/60 px-5 py-4 text-[13px] text-gray-400 backdrop-blur md:flex-row">
+          <p>
+            © {new Date().getFullYear()} {profile.fullName}. All rights reserved.
+          </p>
+          <p className="inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.35em] text-gray-300">
+            <Activity className="h-3.5 w-3.5 text-primary-300" /> Build <span className="text-primary-300/60">×</span> Test <span className="text-primary-300/60">×</span> Ship
+          </p>
+          <p className="inline-flex items-center gap-3">
+            <span className="inline-flex items-center gap-1.5">
+              Made with <Heart className="h-3.5 w-3.5 fill-rose-500 text-rose-500" /> in {profile.location}
+            </span>
+            <span className="h-3 w-px bg-white/20" />
+            <button onClick={toTop} className="inline-flex items-center gap-1 transition-colors hover:text-white">
+              Back to top <ArrowUp className="h-3.5 w-3.5" />
+            </button>
+          </p>
         </div>
       </div>
     </footer>

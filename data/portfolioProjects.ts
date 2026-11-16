@@ -1,86 +1,116 @@
+export type ProjectGroup = 'product' | 'client' | 'engineering' | 'prototype'
+
+export const projectGroups: { id: ProjectGroup | 'all'; label: string }[] = [
+  { id: 'all', label: 'All Projects' },
+  { id: 'product', label: 'Live Products' },
+  { id: 'client', label: 'Client Work' },
+  { id: 'engineering', label: 'AI & Engineering' },
+  { id: 'prototype', label: 'In Progress' },
+]
+
 export interface PortfolioProject {
   id: string
   title: string
   description: string
-  category: 'website' | 'mobile' | 'all'
+  /** Filter tab in the Projects section */
+  group: ProjectGroup
+  featured?: boolean
   tech: string[]
   image?: string
+  /** Small label on the gradient placeholder when there is no image (defaults to "Prototype") */
+  kicker?: string
   githubUrl?: string
   liveUrl?: string
   tags: string[]
 }
 
+/**
+ * Ownership words are exact on purpose ("co-built", "built the UI"): a CTO can check them against git.
+ */
 export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'dourr',
+    group: 'product',
+    featured: true,
     title: 'Dourr: Rental Marketplace',
     description:
-      'Rental-only marketplace for Malaysia, built from scratch around how fast a unit fills rather than listing volume. Search, inquiries, e-tenancy agreements with e-signature, gateway-held deposits, trust badges and identity verification.',
-    category: 'website',
-    tech: ['Next.js', 'React', 'TypeScript', 'Laravel', 'MySQL', 'Curlec', 'Playwright'],
+      'Live rental marketplace for Malaysia, co-built from day one. I own listings, accounts, inquiries with WhatsApp handoff and the Trust Score. Covered by 161 PHPUnit and 50 Playwright test files.',
+    tech: ['Next.js', 'React', 'TypeScript', 'Laravel', 'MySQL', 'Playwright', 'PostHog'],
     image: '/resources/Dourr-rental-marketplace-dashboard.jpg',
-    tags: ['Next.js', 'Laravel', 'Marketplace'],
+    tags: ['Next.js', 'Laravel', 'Live'],
     liveUrl: 'https://dourr.com',
   },
   {
+    id: 'autorentic-tenant-app',
+    group: 'product',
+    featured: true,
+    title: 'Autorentic Tenant App: Flutter, iOS & Android',
+    description:
+      'Tenants pay bills, sign their tenancy and raise requests from their phone. I built the tenant UI in two weeks: 28 screens, English and Bahasa Melayu, and a motion system. In store review.',
+    kicker: 'iOS · Android',
+    tech: ['Flutter', 'Dart', 'Riverpod', 'go_router', 'Firebase', 'PostHog'],
+    tags: ['Flutter', 'Mobile', 'Bilingual'],
+  },
+  {
     id: 'autorentic',
+    group: 'product',
     title: 'Autorentic: Rental Automation',
     description:
-      'Rental automation for Malaysian property agencies, built end to end. Recurring invoicing, LHDN MyInvois e-invoicing, 2C2P payment collection, ledger and statements, plus agent and landlord portals.',
-    category: 'website',
-    tech: ['Laravel', 'React', 'Refine', 'TypeScript', 'MariaDB', '2C2P', 'MyInvois'],
+      'Live SaaS running rent collection for Malaysian agencies. I shipped consolidated monthly invoicing, invoice validation, tax ID fields with an audit trail and a design-system rebuild.',
+    tech: ['Laravel', 'React', 'Refine', 'TypeScript', 'MariaDB'],
     image: '/resources/Autorentic-rental-software-dashboard.png.jpg',
-    tags: ['Laravel', 'React', 'Fintech'],
+    tags: ['Laravel', 'React', 'SaaS'],
     liveUrl: 'https://autorentic.com',
   },
   {
-    id: 'membership-platform',
-    title: 'Membership Platform',
+    id: 'ux-audit-agents',
+    group: 'engineering',
+    featured: true,
+    title: 'AI UX Audit: Multi-Agent Pipeline',
     description:
-      'Scalable SaaS platform for member onboarding and lifecycle management. Type-safe APIs, online payments, optimized for high traffic.',
-    category: 'website',
-    tech: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL', 'tRPC'],
-    image: '/resources/Atlas-membership-software-dashboard.png',
-    tags: ['Next.js', 'TypeScript', 'tRPC'],
+      'Claude Code workflow: analyst agents review screenshots, accessibility checks and PostHog funnels in parallel, then a second model tries to disprove each finding. Pilot: 11 of 14 verified, 0 disproved.',
+    kicker: 'Agents · Verification',
+    tech: ['Claude Code', 'Playwright', 'axe-core', 'PostHog MCP', 'Node.js'],
+    tags: ['AI Agents', 'UX', 'Analytics'],
+  },
+  {
+    id: 'loupe',
+    group: 'engineering',
+    title: 'Loupe: Findings Ledger',
+    description:
+      'Where audit findings go to be proven. Imports are schema-checked and rejected if they carry personal data. No fix starts without a metric, a baseline and a date to measure again.',
+    kicker: 'Laravel · Filament',
+    tech: ['Laravel 12', 'Filament 4', 'SQLite', 'JSON Schema', 'PHPUnit'],
+    tags: ['Laravel', 'Data Integrity', 'Internal Tool'],
   },
   {
     id: 'workshop-manager',
+    group: 'client',
     title: 'Workshop Manager',
     description:
-      'Complete workshop management system built in 6 days. Database design, REST APIs, payment integration, 99% uptime.',
-    category: 'website',
-    tech: ['Laravel', 'PHP', 'MySQL'],
+      'Operations system for a workshop business. First production release in 6 days (schema, APIs, admin, payments), then maintained part-time with reports and role-based permissions.',
+    tech: ['Laravel', 'PHP', 'MySQL', 'Blade'],
     image: '/resources/Mrcount-workshop-software-dashboard.png',
-    tags: ['Laravel', 'PHP'],
+    tags: ['Laravel', 'PHP', 'Client'],
+  },
+  {
+    id: 'membership-platform',
+    group: 'prototype',
+    title: 'Membership Platform',
+    description:
+      'Independent product I scoped end to end: onboarding, renewals and member lifecycle. Type-safe tRPC APIs, Prisma and PostgreSQL, role-based access, sandbox-tested payments. Pre-launch.',
+    tech: ['Next.js', 'TypeScript', 'tRPC', 'Prisma', 'PostgreSQL'],
+    image: '/resources/Atlas-membership-software-dashboard.png',
+    tags: ['Next.js', 'tRPC', 'Pre-launch'],
   },
   {
     id: 'ngamstay',
+    group: 'prototype',
     title: 'NgamStay',
     description:
       'Prototype of a standalone rental marketplace that can optionally plug into a property management system. Dual sign-in paths with verified-versus-reviewed listing flow.',
-    category: 'website',
     tech: ['TypeScript', 'React'],
     tags: ['TypeScript', 'React', 'Prototype'],
     githubUrl: 'https://github.com/Lyanaaaaa/NgamStay',
-  },
-  {
-    id: 'backend-api-systems',
-    title: 'Backend API Systems',
-    description:
-      'RESTful APIs with authentication, role-based permissions, and data workflows. Optimized queries and clean code.',
-    category: 'website',
-    tech: ['Laravel', 'PHP', 'MySQL', 'Node.js'],
-    image: 'https://images.unsplash.com/photo-1760670399462-f5e479452c27?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    tags: ['Laravel', 'API', 'Backend'],
-  },
-  {
-    id: 'modern-web-apps',
-    title: 'Modern Web Apps',
-    description:
-      'Production-grade applications with Next.js and Node.js. Server-side rendering, database optimization, comprehensive docs.',
-    category: 'website',
-    tech: ['Next.js', 'Node.js', 'TypeScript', 'PostgreSQL'],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015',
-    tags: ['Next.js', 'TypeScript', 'PostgreSQL'],
   },
 ]

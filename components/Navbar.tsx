@@ -1,194 +1,177 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-
-import { Menu, X } from 'lucide-react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { ArrowRight, Menu, X } from 'lucide-react'
+import { navLinks, profile } from '@/data/profile'
+import { useActiveSection } from '@/hooks/useActiveSection'
 
 const MENU_CLOSE_DURATION = 450
+const SECTION_IDS = navLinks.map((l) => l.id)
 
 type MenuState = 'closed' | 'open' | 'closing'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [menuState, setMenuState] = useState<MenuState>('closed')
+  const active = useActiveSection(SECTION_IDS)
 
-  const openMenu = useCallback(() => setMenuState('open'), [])
-
+  // Held so a quick reopen cancels the pending close (otherwise the stale timer shuts the menu again)
+  const closeTimer = useRef<number>()
+  const openMenu = useCallback(() => {
+    window.clearTimeout(closeTimer.current)
+    setMenuState('open')
+  }, [])
   const closeMenu = useCallback(() => {
     setMenuState('closing')
-    setTimeout(() => setMenuState('closed'), MENU_CLOSE_DURATION)
+    window.clearTimeout(closeTimer.current)
+    closeTimer.current = window.setTimeout(() => setMenuState('closed'), MENU_CLOSE_DURATION)
+  }, [])
+  useEffect(() => () => window.clearTimeout(closeTimer.current), [])
+
+  useEffect(() => {
+    if (menuState !== 'open') return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && closeMenu()
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuState, closeMenu])
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 40)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+    document.body.style.overflow = menuState !== 'closed' ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
     }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = menuState !== 'closed' ? 'hidden' : 'unset'
-    return () => { document.body.style.overflow = 'unset' }
   }, [menuState])
 
-  const navLinks = [
-    { name: 'Overview', href: '#overview' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Tech Stack', href: '#tech-stack' },
-  ]
+  const goTop = (e: React.MouseEvent) => {
+    e.preventDefault()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-dark-100/40 backdrop-blur-lg border-b border-white/5'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-6 py-4 animate-on-load">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-            className="flex items-center gap-3 group animate-fade-in-left delay-100 cursor-pointer"
-          >
-            <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20 group-hover:ring-primary/40 group-hover:scale-110 transition-all">
-              <Image
-                src="/resources/avatar.jpg"
-                alt="Lyana A"
-                width={40}
-                height={40}
-                className="object-cover w-full h-full"
-                priority
-              />
-            </div>
-            <span className="text-white font-bold md:text-sm text-lg hidden sm:block">Lyana A</span>
+    <>
+      <nav className="fixed inset-x-0 top-0 z-50">
+        {/* Blur lives on its own layer so the mobile overlay (a sibling) isn't trapped by it */}
+        <div
+          className={`absolute inset-0 transition-all duration-500 ${
+            isScrolled ? 'border-b border-primary-400/15 bg-ink/70 backdrop-blur-xl' : 'border-b border-transparent'
+          }`}
+        />
+        <div className="container relative flex h-[72px] items-center justify-between animate-on-load">
+          <a href="#top" onClick={goTop} className="group flex items-center gap-3 animate-fade-in-left">
+            <span className="relative h-9 w-9 overflow-hidden rounded-full ring-2 ring-primary-400/50 transition-transform group-hover:scale-105">
+              <Image src={profile.avatar} alt={profile.fullName} width={36} height={36} className="h-full w-full object-cover" priority />
+            </span>
+            <span className="font-display text-xl font-bold text-white">{profile.firstName}</span>
           </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link, index) => {
-              const delays = ['delay-200', 'delay-300', 'delay-400', 'delay-500']
+          <div className="hidden items-center gap-8 lg:flex">
+            {navLinks.map((link, i) => {
+              const isActive = active === link.id
               return (
                 <a
-                  key={link.name}
+                  key={link.id}
                   href={link.href}
-                  className={`text-gray-300 md:text-sm hover:text-primary transition-colors font-medium animate-fade-in-down ${delays[index]}`}
+                  onClick={link.id === 'top' ? goTop : undefined}
+                  className={`relative py-2 text-[15px] transition-colors animate-fade-in-down ${
+                    isActive ? 'text-primary-200' : 'text-gray-300 hover:text-white'
+                  }`}
+                  style={{ animationDelay: `${100 + i * 60}ms` }}
                 >
                   {link.name}
+                  <span
+                    className={`absolute -bottom-0.5 left-0 h-[2px] rounded-full bg-gradient-to-r from-primary-400 to-primary-300 transition-all duration-300 ${
+                      isActive ? 'w-full opacity-100' : 'w-0 opacity-0'
+                    }`}
+                  />
                 </a>
               )
             })}
-            <a
-              href="#contact"
-              className="btn-primary text-sm animate-scale-in delay-600"
-            >
-              Contact
-            </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => menuState === 'open' ? closeMenu() : openMenu()}
-            className="md:hidden text-white p-2 hover:bg-white/10 card-button transition-all duration-300 hover:scale-110"
-            aria-label="Toggle menu"
-          >
-            {menuState !== 'closed' ? (
-              <X className="w-6 h-6 text-primary" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
-        </div>
-      </div>
+          <div className="flex items-center gap-3">
+            <a href="#contact" className="btn-pill hidden animate-scale-in delay-500 lg:inline-flex">
+              Let&apos;s Connect <ArrowRight className="h-4 w-4" />
+            </a>
 
-      {/* Mobile Menu - Full Screen Overlay */}
+            <button
+              onClick={() => (menuState === 'open' ? closeMenu() : openMenu())}
+              className="icon-btn !h-11 !w-11 lg:hidden"
+              aria-label="Toggle menu"
+              aria-expanded={menuState === 'open'}
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </nav>
+
       {menuState !== 'closed' && (
         <div
-          className="md:hidden fixed inset-0 z-[60]"
+          className="fixed inset-0 z-[60] bg-ink lg:hidden"
           style={{
-            background: 'linear-gradient(135deg, black 0%, #0f1724 50%, black 100%)',
-            animation: menuState === 'closing'
-              ? 'fade-out-down 0.45s ease-in forwards'
-              : 'fade-in 0.3s ease-out both',
+            backgroundImage:
+              'radial-gradient(60% 40% at 80% 10%, rgba(109,40,217,0.35), transparent 70%), radial-gradient(50% 40% at 10% 90%, rgba(67,56,202,0.25), transparent 70%)',
+            animation: menuState === 'closing' ? 'fade-out-down 0.45s ease-in forwards' : 'fade-in 0.3s ease-out both',
           }}
         >
-          {/* Close Button */}
           <button
             onClick={closeMenu}
-            className="absolute top-6 right-6 text-white p-2 hover:bg-white/10 card-button transition-all duration-300 hover:scale-110 z-[70]"
+            className="icon-btn absolute right-4 top-3.5 !h-11 !w-11"
             aria-label="Close menu"
-            style={{
-              animation: menuState === 'closing'
-                ? 'scale-out 0.25s ease-in forwards'
-                : 'scale-in 0.3s ease-out 0.2s both',
-            }}
+            style={{ animation: menuState === 'closing' ? 'scale-out 0.25s ease-in forwards' : 'scale-in 0.3s ease-out 0.2s both' }}
           >
-            <X className="w-6 h-6 text-primary" />
+            <X className="h-5 w-5 text-primary-300" />
           </button>
 
-          <div className="flex flex-col items-center justify-center h-full px-6">
-            <div className="flex flex-col items-center gap-6 w-full max-w-sm">
+          <div className="flex h-full flex-col items-center justify-center px-4">
+            <div className="flex w-full max-w-sm flex-col gap-2">
               {navLinks.map((link, index) => (
                 <a
-                  key={link.name}
+                  key={link.id}
                   href={link.href}
                   onClick={closeMenu}
-                  className="text-gray-300 hover:text-primary hover:bg-white/5 transition-all duration-300 font-medium px-6 py-4 card-button group w-full text-center text-lg"
+                  className={`flex items-center justify-between rounded-button px-5 py-4 font-display text-2xl font-semibold transition-colors ${
+                    active === link.id ? 'bg-primary-500/15 text-white' : 'text-gray-300 hover:text-white'
+                  }`}
                   style={{
-                    animation: menuState === 'closing'
-                      ? `fade-out-down 0.3s ease-in ${(navLinks.length - 1 - index) * 0.06}s forwards`
-                      : `fade-in-up 0.4s ease-out ${index * 0.1 + 0.3}s both`,
+                    animation:
+                      menuState === 'closing'
+                        ? `fade-out-down 0.3s ease-in ${(navLinks.length - 1 - index) * 0.05}s forwards`
+                        : `fade-in-up 0.4s ease-out ${index * 0.07 + 0.2}s both`,
                   }}
                 >
-                  <span className="flex items-center justify-center gap-2">
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-primary transition-all duration-300"></span>
+                  <span>
+                    <span className="mr-3 font-mono text-xs text-primary-300/70">0{index}</span>
                     {link.name}
                   </span>
+                  <ArrowRight className="h-5 w-5 opacity-50" />
                 </a>
               ))}
               <a
                 href="#contact"
                 onClick={closeMenu}
-                className="btn-primary px-8 py-4 text-base text-center mt-4 w-full"
+                className="btn-primary mt-6 w-full"
                 style={{
-                  animation: menuState === 'closing'
-                    ? 'fade-out-down 0.3s ease-in forwards'
-                    : `fade-in-up 0.4s ease-out ${navLinks.length * 0.1 + 0.3}s both`,
+                  animation:
+                    menuState === 'closing'
+                      ? 'fade-out-down 0.3s ease-in forwards'
+                      : `fade-in-up 0.4s ease-out ${navLinks.length * 0.07 + 0.2}s both`,
                 }}
               >
-                Contact
+                Let&apos;s Connect <ArrowRight className="h-4 w-4" />
               </a>
-
-              {/* Avatar at Bottom */}
-              <div
-                className="mt-8"
-                style={{
-                  animation: menuState === 'closing'
-                    ? 'scale-out 0.3s ease-in forwards'
-                    : `fade-in-up 0.4s ease-out ${navLinks.length * 0.1 + 0.4}s both`,
-                }}
-              >
-                <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-primary/30 hover:ring-primary/50 transition-all hover:scale-110">
-                  <Image
-                    src="/resources/avatar.jpg"
-                    alt="Lyana A"
-                    width={80}
-                    height={80}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-              </div>
             </div>
           </div>
         </div>
       )}
-    </nav>
+    </>
   )
 }

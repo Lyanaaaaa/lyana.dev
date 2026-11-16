@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 
 /**
  * Observes each child card individually and staggers their entrance animation.
@@ -11,10 +11,10 @@ import { useEffect, useRef, useCallback } from 'react'
  * @param resetKey - when it changes, re-scan for newly rendered children (e.g. after a filter
  *   change remounts the grid); without it, cards rendered later stay at opacity 0
  */
-export function useStaggerAnimation(baseDelay = 120, resetKey?: unknown) {
-  const containerRef = useRef<HTMLDivElement>(null)
+export function useStaggerAnimation<T extends HTMLElement = HTMLDivElement>(baseDelay = 120, resetKey?: unknown) {
+  const containerRef = useRef<T>(null)
 
-  const observe = useCallback(() => {
+  useEffect(() => {
     const container = containerRef.current
     if (!container) return
 
@@ -42,11 +42,7 @@ export function useStaggerAnimation(baseDelay = 120, resetKey?: unknown) {
     children.forEach((child) => observer.observe(child))
 
     return () => observer.disconnect()
-  }, [baseDelay])
-
-  useEffect(() => {
-    return observe()
-  }, [observe, resetKey])
+  }, [baseDelay, resetKey])
 
   return containerRef
 }

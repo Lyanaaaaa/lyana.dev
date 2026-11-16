@@ -1,113 +1,124 @@
+export type HighlightStatus = 'live' | 'review' | 'internal' | 'prelaunch'
+
+export interface ExperienceHighlight {
+  name: string
+  status?: HighlightStatus
+  /** One sentence. The name carries the "what", this carries the proof. */
+  text: string
+  href?: string
+}
+
 export interface ExperienceItem {
   type: 'education' | 'work'
   title: string
   organization: string
   period: string
   location?: string
-  description: string[]
+  /** One or two sentences a stakeholder can read in five seconds */
+  summary: string
+  /** Named pieces of work, rendered as scannable tiles (work entries only) */
+  highlights?: ExperienceHighlight[]
   tags?: string[]
 }
 
+export const statusLabel: Record<HighlightStatus, string> = {
+  live: 'Live',
+  review: 'In store review',
+  internal: 'Internal tool',
+  prelaunch: 'Pre-launch',
+}
+
+/** Status dot colour, shared by Experience tiles and the Skills product list */
+export const statusDot: Record<HighlightStatus, string> = {
+  live: 'bg-emerald-400',
+  review: 'bg-amber-300',
+  internal: 'bg-primary-300',
+  prelaunch: 'bg-gray-400',
+}
+
+/**
+ * Every line here must survive a reviewer reading the git history.
+ * "Co-built" / "built the UI for" are deliberate: precise ownership reads as more senior than big claims.
+ */
 export const experienceData: ExperienceItem[] = [
   {
     type: 'work',
     title: 'Software Engineer',
     organization: 'Tech Strongbox',
-    period: '2025 - Present',
+    period: 'Apr 2025 – Present',
     location: 'Remote',
-    description: [
-      'Built Dourr, a rental marketplace for Malaysia, from scratch, with a few features handled by other developers',
-      'Built Autorentic, a rental automation platform for property agencies',
-      'Ship full-stack features across Next.js, React and Laravel, from search and inquiries to e-tenancy agreements and e-signature',
-      'Own payments and compliance flows: gateway collection, deposits, invoicing and LHDN MyInvois e-invoicing',
-      'Cover releases with PHPUnit and Playwright suites, deployed through GitHub Actions',
+    summary:
+      'Product engineer on a small team building rental and property software for Malaysia, across web, mobile and our own AI tooling.',
+    highlights: [
+      {
+        name: 'Dourr',
+        status: 'live',
+        text: 'Co-built the rental marketplace from day one. Main frontend author; I own listings, accounts, inquiries with WhatsApp handoff and the Trust Score.',
+        href: 'https://dourr.com',
+      },
+      {
+        name: 'Autorentic tenant app',
+        status: 'review',
+        text: 'Built the tenant UI in Flutter in two weeks: 28 screens, bills and multi-bill payment, in-app tenancy signing, English and Bahasa Melayu.',
+      },
+      {
+        name: 'AI UX-audit pipeline',
+        status: 'internal',
+        text: 'Claude Code workflow where analyst agents review screens and PostHog data in parallel, then a second model tries to disprove each finding. Pilot: 11 of 14 verified.',
+      },
+      {
+        name: 'Loupe',
+        status: 'internal',
+        text: 'Findings ledger: schema-checked imports, personal-data scans, and no fix starts without a metric, a baseline and a date to measure again.',
+      },
+      {
+        name: 'Autorentic web',
+        status: 'live',
+        text: 'Consolidated monthly invoices, invoice validation, agency tax IDs with an audit trail, landlord ticket access and a design-system rebuild.',
+        href: 'https://autorentic.com',
+      },
     ],
-    tags: ['Next.js', 'React', 'Laravel', 'MySQL', 'Playwright'],
+    tags: ['Laravel', 'Next.js', 'React', 'Flutter', 'Claude Code', 'PostHog', 'Playwright'],
   },
   {
     type: 'work',
-    title: 'Full-Stack Developer',
-    organization: 'Membership Management System (Freelance)',
-    period: 'Mar 2025 - Present',
-    location: 'Remote',
-    description: [
-      'Built scalable membership platform handling onboarding, renewals, and lifecycle management',
-      'Designed type-safe backend APIs with tRPC and database layer with Prisma ORM',
-      'Integrated a payment gateway for membership payments (sandbox-tested)',
-      'Deployed production system optimized for high traffic and reliability',
-    ],
-    tags: ['Next.js', 'TypeScript', 'tRPC', 'PostgreSQL'],
-  },
-  {
-    type: 'work',
-    title: 'Backend Developer',
+    title: 'Backend Developer, Part-Time',
     organization: 'Workshop Management System',
-    period: 'Mar 2025 (6 days)',
-    description: [
-      'Delivered production-ready system from scratch in 6 days',
-      'Built complete database schema, CRUD APIs, and admin dashboard',
-      'Integrated payment gateway with secure validation',
-      'Achieved fast response times with 99% uptime',
-    ],
-    tags: ['Laravel', 'PHP', 'MySQL'],
+    period: '2025 – Jan 2026',
+    location: 'Remote',
+    summary:
+      'Took the first production release from empty repo to live in 6 days (schema, CRUD APIs, admin dashboard, payments), then maintained it with reporting dashboards and role-based permissions that keep each user inside their own data.',
+    tags: ['Laravel', 'PHP', 'MySQL', 'Blade'],
   },
   {
     type: 'work',
-    title: 'Full-Stack Developer',
-    organization: 'Management Platform',
-    period: '1.5 Years',
-    description: [
-      'Developed multiple web applications with focus on clean, maintainable code',
-      'Built robust CRUD operations and user-friendly interfaces',
-      'Refactored legacy code improving performance and maintainability',
-      'Led database design and optimization strategies',
-    ],
-    tags: ['Laravel', 'PHP', 'JavaScript', 'MySQL'],
+    title: 'Product & Backend Engineer, Independent',
+    organization: 'Membership Management System',
+    period: '2025 – Present',
+    location: 'Remote',
+    summary:
+      'Scoped the product end to end (onboarding, renewals, member lifecycle) before writing code. Type-safe tRPC APIs, a Prisma and PostgreSQL schema, role-based access, and payments tested against the gateway sandbox. Pre-launch.',
+    tags: ['Next.js', 'TypeScript', 'tRPC', 'Prisma', 'PostgreSQL'],
   },
   {
     type: 'education',
-    title: "Bachelor's Degree, Chemical Engineering",
+    title: 'B.Eng. Chemical Engineering',
     organization: 'Universiti Putra Malaysia',
-    period: '2018 - 2022',
-    description: [
-      'Developed strong analytical and problem-solving skills',
-      'Trained in breaking down complex systems into testable components',
-      'Applied data-driven reasoning to engineering challenges',
-      'Leadership: College Representative Council, NACES Symposium participant',
-    ],
-  },
-  {
-    type: 'education',
-    title: 'Self-Taught Software Engineer',
-    organization: 'Project-Based Learning',
-    period: 'Ongoing',
-    description: [
-      'Built real-world systems with Laravel, Next.js, and Node.js',
-      'Specialized in backend architecture, database design, and API development',
-      'Hands-on experience with role-based access, payment systems, and workflows',
-      'Continuous learning through production-quality projects',
-    ],
-    tags: ['Laravel', 'Next.js', 'TypeScript', 'PostgreSQL'],
+    period: '2018 – 2022',
+    summary: 'Trained to model systems, isolate variables and trust measurements over intuition. College Representative Council.',
   },
   {
     type: 'education',
     title: 'Foundation in Science, First Class',
     organization: 'Universiti Putra Malaysia',
-    period: '2017 - 2018',
-    description: [
-      'First Class honors in foundation studies',
-      'Strong foundation in Chemistry, Physics, Biology, and Mathematics',
-      'Active in university activities and sports competitions',
-    ],
+    period: '2017 – 2018',
+    summary: 'First Class honours in Chemistry, Physics, Biology and Mathematics.',
   },
   {
     type: 'education',
-    title: 'Pure Science Stream',
-    organization: 'SM Sains Selangor',
-    period: '2012 - 2016',
-    description: [
-      'Grade: SPM or Malaysian Certificate of Education or GSCE equivalent : 8A1B | 2A+ 4A 2A- 1B+',
-      'Activities and societies: Student Leadership Board (2014-2016) | School Prefect (2015-2016) | Guru Muda (2016)',
-    ],
+    title: 'Software Engineering, Self-Directed',
+    organization: 'Production work, not tutorials',
+    period: '2024 – Present',
+    summary: 'Learned on real codebases with real users: code review, CI, end-to-end tests and production deploys from the first month.',
   },
 ]

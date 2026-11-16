@@ -1,9 +1,9 @@
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
-import WhatIDo from '@/components/WhatIDo'
+import About from '@/components/About'
 import Experience from '@/components/Experience'
 import ProjectsSection from '@/components/ProjectsSection'
-import TechStack from '@/components/TechStack'
+import Skills from '@/components/Skills'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
@@ -11,25 +11,15 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">
+      <main className="relative">
         <Hero />
-        <div id="overview">
-          <WhatIDo />
-        </div>
-        <div id="experience">
-          <Experience />
-        </div>
-        <div id="projects">
-          <ProjectsSection />
-        </div>
-        <div id="tech-stack">
-          <TechStack />
-        </div>
-        <div id="contact">
-          <Contact />
-        </div>
-        <Footer />
+        <About />
+        <Experience />
+        <ProjectsSection />
+        <Skills />
+        <Contact />
       </main>
+      <Footer />
     </>
   )
 }

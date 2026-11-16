@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lyana Aqilah · Resume</title>
+<style>
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; color: #1a1a2e; font-size: 9.6pt; line-height: 1.42; margin: 0; }
+  h1 { font-size: 22pt; margin: 0; letter-spacing: -0.02em; }
+  .role { font-size: 11pt; color: #5b21b6; font-weight: 600; margin-top: 2px; }
+  .contact { color: #444; margin-top: 5px; font-size: 9pt; }
+  .contact span + span::before { content: "·"; margin: 0 6px; color: #aaa; }
+  h2 { font-size: 9pt; text-transform: uppercase; letter-spacing: 0.14em; color: #5b21b6; border-bottom: 1px solid #ddd6fe; padding-bottom: 3px; margin: 13px 0 6px; }
+  .summary { margin: 9px 0 0; }
+  .job { margin-bottom: 8px; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .job-title { font-weight: 700; font-size: 10.2pt; }
+  .job-org { color: #444; font-weight: 400; }
+  .date { color: #555; font-size: 9pt; white-space: nowrap; }
+  ul { margin: 3px 0 0; padding-left: 15px; }
+  li { margin: 2px 0; }
+  li b { color: #111; }
+  .skills { display: grid; grid-template-columns: 118px 1fr; row-gap: 2px; }
+  .skills dt { font-weight: 700; }
+  .skills dd { margin: 0; }
+  .edu { display: flex; justify-content: space-between; margin: 2px 0; }
+</style>
+</head>
+<body>
+  <h1>Lyana Aqilah</h1>
+  <div class="role">Full-Stack Software Engineer · Web, Mobile &amp; AI Agent Workflows</div>
+  <div class="contact">
+    <span>Malaysia (MYT) · Remote</span><span>nurlyanaaqilah@gmail.com</span><span>linkedin.com/in/lyanaaqilah</span><span>github.com/Lyanaaaaa</span>
+  </div>
+
+  <p class="summary">
+    Full-stack engineer shipping production rental and property software in <b>Laravel, Next.js and Flutter</b>. Co-built a live
+    marketplace from its first commit, built a bilingual tenant mobile app in two weeks, and designed a multi-agent AI audit pipeline
+    in which every finding has to survive a second model's attempt to disprove it. Chemical-engineering trained: measure before you trust.
+  </p>
+
+  <h2>Experience</h2>
+
+  <div class="job">
+    <div class="job-head"><div class="job-title">Software Engineer <span class="job-org">· Tech Strongbox · Remote</span></div><div class="date">Apr 2025 – Present</div></div>
+    <ul>
+      <li><b>Dourr, a live rental marketplace (Next.js, Laravel, MySQL).</b> Co-built from day one with one other engineer. Wrote the first backend and frontend code and am the main frontend author. Own property listings, user accounts, inquiries with WhatsApp handoff, and the Trust Score and badges. The codebase is covered by 161 PHPUnit and 50 Playwright test files.</li>
+      <li><b>Autorentic tenant app (Flutter, iOS and Android).</b> Built the tenant-facing UI in two weeks: 28 screens covering bills, multi-bill payment, in-app tenancy signing, help requests with photos, and notifications. Added a full Bahasa Melayu translation (720 keys), named API errors and a motion system, and wrote the staging seed data and UAT test plan. In store review.</li>
+      <li><b>AI UX-audit pipeline (Claude Code, Playwright, PostHog MCP).</b> Designed a workflow that captures screens at 3 sizes in light and dark mode, runs axe accessibility checks, and sends analyst agents in parallel over screenshots and funnel data. A second model then tries to disprove each finding, with a cap on agents per run and personal-data scrubbing. Pilot: 11 of 14 findings verified, 0 disproved. Chose which model fits each role through a head-to-head test.</li>
+      <li><b>Loupe, a findings ledger (Laravel 12, Filament 4).</b> Imports are checked against a JSON schema and rejected if they carry personal data, reuse an ID or change what a metric means. No fix can start without a metric, a baseline and a date to measure again. Outcomes are judged held, improved, no change, worse, or too small to tell.</li>
+      <li><b>Autorentic web, a live SaaS (Laravel, React).</b> Monthly consolidated invoices, invoice validation rules, agency tax ID fields with an audit trail, landlord ticket access, standardised email templates and a four-phase design-system rebuild.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head"><div class="job-title">Backend Developer, Part-Time <span class="job-org">· Workshop Management System</span></div><div class="date">2025 – Jan 2026</div></div>
+    <ul>
+      <li>Took the first production release from empty repo to live in <b>6 days</b>: schema, CRUD APIs, admin dashboard and payment integration (Laravel, MySQL).</li>
+      <li>Maintained and extended it afterwards: operational dashboards and reports, and role-based permissions that keep each user inside their own data.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head"><div class="job-title">Product &amp; Backend Engineer, Independent <span class="job-org">· Membership Management System</span></div><div class="date">2025 – Present</div></div>
+    <ul>
+      <li>Scoped the product end to end (onboarding, renewals, member lifecycle) before writing code. Type-safe tRPC APIs, a Prisma and PostgreSQL schema, role-based access, and payments tested against the gateway sandbox. Pre-launch.</li>
+    </ul>
+  </div>
+
+  <h2>Skills</h2>
+  <dl class="skills">
+    <dt>Backend</dt><dd>PHP, Laravel, Filament, Node.js, tRPC, REST API design, role-based access control</dd>
+    <dt>Frontend</dt><dd>TypeScript, React, Next.js, Refine, Tailwind CSS</dd>
+    <dt>Mobile</dt><dd>Flutter, Dart, Riverpod, go_router, i18n (EN / BM)</dd>
+    <dt>Data</dt><dd>MySQL, MariaDB, PostgreSQL, Prisma, schema design</dd>
+    <dt>Quality &amp; delivery</dt><dd>Playwright, PHPUnit, axe-core, GitHub Actions, Docker, UAT planning</dd>
+    <dt>AI &amp; analytics</dt><dd>Claude Code multi-agent workflows, verification agents, MCP, PostHog funnels</dd>
+  </dl>
+
+  <h2>Education</h2>
+  <div class="edu"><div><b>B.Eng. Chemical Engineering</b>, Universiti Putra Malaysia</div><div class="date">2018 – 2022</div></div>
+  <div class="edu"><div><b>Foundation in Science, First Class</b>, Universiti Putra Malaysia</div><div class="date">2017 – 2018</div></div>
+  <p style="margin:6px 0 0;color:#444">Languages: English, Bahasa Melayu · Leadership: College Representative Council, UPM</p>
+</body>
+</html>
