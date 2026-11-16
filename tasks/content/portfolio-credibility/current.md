@@ -1,5 +1,5 @@
 <!--LLM-CONTEXT
-Status: ✅ Revamp shipped to master 2026-11-16; polish items open
+Status: ✅ Revamp live on lyana-dev.vercel.app 2026-11-16; polish items open
 Domain: content
 Gotchas (critical; full list in ## Gotchas below):
   - Every ownership claim must survive `git log -i --author=lyana` on the source repo
@@ -12,7 +12,7 @@ Last updated: 2026-11-16
 
 ## Quick Start (read this first in next session)
 
-**Where we are:** site copy, project cards, Experience, About, Skills and the resume were rewritten so a CTO checking git finds every claim true. Shipped to `master` (Vercel deploys production from `master`; there is no `prod` branch, decided 2026-11-16).
+**Where we are:** site copy, project cards, Experience, About, Skills and the resume were rewritten so a CTO checking git finds every claim true. Live on lyana-dev.vercel.app since 2026-11-16. Vercel's production branch is `main`, not `master`: release by pushing `master`, then fast-forwarding `main` (see `CLAUDE.md` Stack).
 **Next action:** pick from Next Steps below; the top two are copy/polish on the Skills section and the house-style clean-up list.
 **Re-run the review:** paste `docs/portfolio-review-prompt.md` into a fresh session in this repo.
 **Success looks like:** a reviewer can open any claim on the site, run `git log` on the named repo, and find it accurate.

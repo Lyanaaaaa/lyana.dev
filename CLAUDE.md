@@ -2,7 +2,7 @@
 
 ## Stack
 - Next.js 14.2 (App Router), React 18, TypeScript, Tailwind CSS 3.4
-- Deployed on Vercel (Linux, case-sensitive filesystem)
+- Deployed on Vercel (Linux, case-sensitive filesystem). **Production branch is `main`**: a push to `master` only builds a Preview. Release = push `master`, then fast-forward `main` to it. Commits must carry the GitHub-linked author (repo-local `user.email` is the `users.noreply.github.com` address) or Vercel fails the deploy
 
 ## Design Token System
 
